@@ -2,9 +2,7 @@ import math as m
 import random as aleajactaest
 import time as t
 
-
-#Cela sert de test pour savoir si le code fonctionnait
-#réponses = ["cool", "paradisiaque", "détergent", "ratatouille", "caribou", "notamment", "ridicule", "pastèque", "illustré", "justification"]
+réponses = ["cool", "paradisiaque", "détergent", "ratatouille", "caribou", "notamment", "ridicule", "pastèque", "illustré", "justification"]
 lettres = set("qwertzuiopasdfghjklyxcvbnméèêëàäâîìïôöòûüùÿ")
 nb_chances = 10
 hard = False
@@ -13,7 +11,11 @@ dico = open("liste.de.mots.francais.frgut.txt", "r")
 réponses = dico.readlines()
 dico.close()
 
+
 def ltostr(x : list) :
+    '''
+    convertit une liste en string
+    '''
     z = ""
     for i in x :
         z += str(i)
@@ -49,15 +51,15 @@ def setup() :
     if input("Mode difficile ?").lower in {"oui","yes", "ouais", "avec plaisir", "je vous en saurais fort gré"} :
         hard = True
     else :
-        hard = False
+        hard = False        #valeur par défaut
     try :
         nb_chances = int(input("Nombre d'erreurs maximum ?"))
     except :
-        nb_chances = 10
+        nb_chances = 10     #valeur par défaut
     try :
         nb_mots = int(input("Nombre de mots à deviner ?"))
     except :
-        nb_mots = 1
+        nb_mots = 1           #valeur par défaut
 
 
 
