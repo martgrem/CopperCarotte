@@ -22,7 +22,7 @@ def ltostr(x : list) :
         z += str(i)
     return z
 
-
+#raccourci
 def p(x) :
     print(x)
 def p05(x) :
@@ -34,6 +34,9 @@ def p1(x) :
 
 
 def diffletters(x : (str or list)) :
+    '''
+    Compter le nombre de lettre différent
+    '''
     y = []
     for i in x :
         if i in lettres and i not in y :
@@ -44,7 +47,11 @@ def diffletters(x : (str or list)) :
 
 
 
+
 def setup() :
+    '''
+    Choisis la difficulté
+    '''
     global hard
     global nb_chances
     global nb_mots
@@ -67,20 +74,29 @@ def setup() :
 
 
 def pendu(x : list) :
+
+    #choisis un mot aléatoire à faire deviner
     answer = ltostr(aleajactaest.sample(x, nb_mots))
     answer = ltostr(aleajactaest.sample(réponses, nb_mots))
     answer = answer.strip()
+    
+    #ajoute le nombre de "_" correspondant au nombre de lettre du mot
     motvide = "_ "*(len(answer)-1) + "_"
     oùilenest = ["_"]*len(answer)
+    
     #print(answer)
     nb_essai = 1
     essayés = []
+    
+    #Petite intro
     print("Bonjour !")
     t.sleep(0.5)
     print("Bonne chance !")
     t.sleep(0.5)
     print("Le mot est", motvide)
     t.sleep(0.5)
+
+    #Boucle qui vérifie que le nombre d'essai effectué par le joueur ne dépasse pas le nombre d'essai maximu autorisé par de niveau de difficulté
     while "_" in oùilenest and nb_essai <= nb_chances :
         essai = input("Une lettre ?").lower()
         t.sleep(0.5)
@@ -98,6 +114,8 @@ def pendu(x : list) :
             t.sleep(1)
             if hard :
                 nb_essai += 1
+        
+        #Commande qui ne pénalise pas le fait qu'un joueur réessaie une lettre
         elif essai in essayés :
             print("Déjà mise !")
             t.sleep(1)
