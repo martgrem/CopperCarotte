@@ -2,7 +2,8 @@ import math as m
 import random as aleajactaest
 import time as t
 
-réponses = ["cool", "paradisiaque", "détergent", "ratatouille", "caribou", "notamment", "ridicule", "pastèque", "illustré", "justification"]
+#Cela nous permet de voir si le code fonctionne
+#réponses = ["cool", "paradisiaque", "détergent", "ratatouille", "caribou", "notamment", "ridicule", "pastèque", "illustré", "justification"]
 lettres = set("qwertzuiopasdfghjklyxcvbnméèêëàäâîìïôöòûüùÿ")
 nb_chances = 10
 hard = False
