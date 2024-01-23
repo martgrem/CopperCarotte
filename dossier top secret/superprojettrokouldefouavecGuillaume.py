@@ -41,7 +41,6 @@ def diffletters(x : (str or list)) :
     return len(y)
 
 
-redt = 767676
 
 
 
