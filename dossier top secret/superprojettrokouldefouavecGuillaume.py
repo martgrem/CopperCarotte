@@ -8,7 +8,7 @@ lettres = set("qwertzuiopasdfghjklyxcvbnméèêëàäâîìïôöòûüùÿ")
 nb_chances = 10
 hard = False
 nb_mots = 1
-dico = open("liste.de.mots.francais.frgut.txt", "r")
+dico = open("dossier top secret/liste.de.mots.francais.frgut.txt", "r")
 réponses = dico.readlines()
 dico.close()
 
