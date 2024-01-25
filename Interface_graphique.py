@@ -1,17 +1,13 @@
-#Importation des bibliothèques nécessaires
-import pygame
+#importe la librairie Tkinter
 
-#Initialisation de la bibliothèque Pygame
-pygame.init()
+from tkinter import *
+import customtkinter
 
-#Création de la fenêtre
-x=640
-y=480
-fenetre = pygame.display.set_mode((x, y))
+#création de la fenêtre
+page = customtkinter.CTk()
 
-#Variable qui continue la boucle si = 1, stoppe si = 0
-continuer = 1
+page.geometry("300x400")
 
-#Boucle infinie
-while continuer:
-    continue
+boutton = customtkinter.CTkButton(master=page, texte="Bonjour")
+boutton.place(dx=0.5, dy=0.5, ancre =CENTER)
+page.mainloop()
