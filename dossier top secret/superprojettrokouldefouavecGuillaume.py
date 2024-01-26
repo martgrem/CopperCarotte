@@ -76,7 +76,7 @@ def setup() :
 def pendu(x : list) :
 
     #choisis un mot aléatoire à faire deviner
-    answer = ltostr(aleajactaest.sample(x, nb_mots))
+    #answer = ltostr(aleajactaest.sample(x, nb_mots))
     answer = ltostr(aleajactaest.sample(réponses, nb_mots))
     answer = answer.strip()
     
@@ -129,7 +129,8 @@ def pendu(x : list) :
                         oùilenest[pos] = essai
                 print("Good Guess !")
                 t.sleep(0.55)
-                print("Le mot est", ltostr(oùilenest))
+                if "_" in oùilenest :
+                    print("Le mot est", ltostr(oùilenest))
                 t.sleep(1)
             else :
                 print("Raté...")
@@ -142,13 +143,13 @@ def pendu(x : list) :
     if nb_essai > nb_chances :
         print("Dommage !")
         input()
-        p("Vous n'avez trouvé que" + ltostr(oùilenest) + "soit", str(diffletters(oùilenest)) + "lettres différentes sur" + str(diffletters(answer)) + "!")
+        p("Vous n'avez trouvé que " + ltostr(oùilenest) + ", soit " + str(diffletters(oùilenest)) + " lettres différentes sur " + str(diffletters(answer)) + "!")
         input()
-        print("Le mot était...)")
+        print("Le mot était...")
         input()
-        p(answer, "!")
+        p(str(answer) + "!")
     else :
-        print("Le mot était bien", answer, "\nBravo !!!")
+        print("Le mot était bien " +  str(answer) + "\nBravo !!!")
     
     
 
