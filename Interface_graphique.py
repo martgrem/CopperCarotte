@@ -6,7 +6,7 @@ pygame.init()
 
 #Création de la fenêtre
 x=640
-y=480
+y=480+
 fenetre = pygame.display.set_mode((x, y))
 
 #Variabl
