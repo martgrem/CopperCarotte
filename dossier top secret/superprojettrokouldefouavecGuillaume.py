@@ -8,7 +8,7 @@ lettres = set("qwertzuiopasdfghjklyxcvbnméèêëàäâîìïôöòûüùÿç ")
 nb_chances = 10
 hard = False
 nb_mots = 1
-dico = open("info/CopperCarotte/dossier top secret/liste.de.mots.francais.frgut.txt", "r")
+dico = open("liste_de_mots_francais_frgut.txt", "r")
 réponses = dico.readlines()
 dico.close()
 
@@ -78,12 +78,11 @@ def setup() :
 
 
 
-
 def pendu(x : list) :
 
     #choisis un mot aléatoire à faire deviner
     #answer = ltostr(aleajactaest.sample(x, nb_mots))
-    answer = ltostr(aleajactaest.sample(réponses, nb_mots))
+    answer = "test" #ltostr(aleajactaest.sample(réponses, nb_mots))
     answer = answer.strip()
     answer = entertospace(answer)
     
@@ -159,12 +158,14 @@ def pendu(x : list) :
         print("Le mot était bien " +  str(answer) + "\nBravo !!!")
     
     print(leaderboard.score(ltostr(oùilenest), nb_essai))
+    leaderboard.highscore((leaderboard.pseudo()),(leaderboard.score(ltostr(oùilenest), nb_essai)))
     
 
 #print(entertospace("abc\nefg"))
-
 setup()
 pendu(réponses)
+
+
 
 
 

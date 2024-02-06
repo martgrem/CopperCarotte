@@ -18,7 +18,7 @@ def diffletters(x : (str or list)) :
 
 def pseudo() :
     pseudo = input("Choisissez un pseudonyme à utiliser lors de vos aventures dans le monde fascinant de l'éxecution publique.")
-    return
+    
 
 def score(mot, nbessais) :   
     '''
@@ -43,12 +43,15 @@ def highscore(pseudo, score) :
     '''
     f = open("leaderboard.txt", "r")
     lines = f.readlines()
-    nom3, best3score = lines[3].split(",")
+    nom3, best3score = lines[2].split(",")
+    best3score = int(best3score)
     if score >= best3score :
         f.close()
         f = open("leaderboard.txt", "w")
-        nom1, best1score = lines[1].split(",")
-        nom2, best2score = lines[2].split(",")
+        nom1, best1score = lines[0].split(",")
+        nom2, best2score = lines[1].split(",")
+        best1score = int(best1score)
+        best2score = int(best2score)
         if best1score < score :
             f.write(str(pseudo) + ", " + str(score) + "\n" + str(nom1) + ", " + str(best1score) + "\n" + str(nom2) + ", " + str(best2score))
         elif best2score < score :
@@ -57,4 +60,3 @@ def highscore(pseudo, score) :
             f.write(str(nom1) + ", " + str(best1score) + "\n" + str(nom2) + ", " + str(best2score) + "\n" + str(pseudo) + ", " + str(score))
     f.close()
             
-
