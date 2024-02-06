@@ -1,14 +1,14 @@
 import math as m
 import random as aleajactaest
 import time as t
-
+import leaderboard
 #Cela nous permet de voir si le code fonctionne
 #réponses = ["cool", "paradisiaque", "détergent", "ratatouille", "caribou", "notamment", "ridicule", "pastèque", "illustré", "justification"]
-lettres = set("qwertzuiopasdfghjklyxcvbnméèêëàäâîìïôöòûüùÿ")
+lettres = set("qwertzuiopasdfghjklyxcvbnméèêëàäâîìïôöòûüùÿç ")
 nb_chances = 10
 hard = False
 nb_mots = 1
-dico = open("dossier top secret/liste.de.mots.francais.frgut.txt", "r")
+dico = open("info/CopperCarotte/dossier top secret/liste.de.mots.francais.frgut.txt", "r")
 réponses = dico.readlines()
 dico.close()
 
@@ -33,7 +33,7 @@ def p1(x) :
     t.sleep(1)
 
 
-def diffletters(x : (str or list)) :
+def lendiffletters(x : (str or list)) :
     '''
     Compter le nombre de lettre différent
     '''
@@ -44,7 +44,13 @@ def diffletters(x : (str or list)) :
     return len(y)
 
 
-
+def entertospace(x : str) :
+    y = list(x)
+    for i, j in enumerate(y) :
+        if j == "\n" :
+            y[i] = " "
+    return ltostr(y)
+            
 
 
 
@@ -76,9 +82,10 @@ def setup() :
 def pendu(x : list) :
 
     #choisis un mot aléatoire à faire deviner
-    answer = ltostr(aleajactaest.sample(x, nb_mots))
+    #answer = ltostr(aleajactaest.sample(x, nb_mots))
     answer = ltostr(aleajactaest.sample(réponses, nb_mots))
     answer = answer.strip()
+    answer = entertospace(answer)
     
     #ajoute le nombre de "_" correspondant au nombre de lettre du mot
     motvide = "_ "*(len(answer)-1) + "_"
@@ -129,7 +136,8 @@ def pendu(x : list) :
                         oùilenest[pos] = essai
                 print("Good Guess !")
                 t.sleep(0.55)
-                print("Le mot est", ltostr(oùilenest))
+                if "_" in oùilenest :
+                    print("Le mot est", ltostr(oùilenest))
                 t.sleep(1)
             else :
                 print("Raté...")
@@ -142,17 +150,20 @@ def pendu(x : list) :
     if nb_essai > nb_chances :
         print("Dommage !")
         input()
-        p("Vous n'avez trouvé que" + ltostr(oùilenest) + "soit", str(diffletters(oùilenest)) + "lettres différentes sur" + str(diffletters(answer)) + "!")
+        p("Vous n'avez trouvé que " + ltostr(oùilenest) + ", soit " + str(lendiffletters(oùilenest)) + " lettres différentes sur " + str(lendiffletters(answer)) + "!")
         input()
-        print("Le mot était...)")
+        print("Le mot était...")
         input()
-        p(answer, "!")
+        p(str(answer) + "!")
     else :
-        print("Le mot était bien", answer, "\nBravo !!!")
+        print("Le mot était bien " +  str(answer) + "\nBravo !!!")
     
+    print(leaderboard.score(ltostr(oùilenest), nb_essai))
     
 
-#setup()
+#print(entertospace("abc\nefg"))
+
+setup()
 pendu(réponses)
 
 

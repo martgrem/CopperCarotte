@@ -6,8 +6,10 @@ import customtkinter
 #création de la fenêtre
 page = customtkinter.CTk()
 
-page.geometry("300x400")
+#Création de la fenêtre
+x=640
+y=480
+fenetre = pygame.display.set_mode((x, y))
 
-boutton = customtkinter.CTkButton(master=page, texte="Bonjour")
-boutton.place(dx=0.5, dy=0.5, ancre =CENTER)
-page.mainloop()
+#Variable qui continue la boucle si = 1, stoppe si = 0
+continuer = 1
