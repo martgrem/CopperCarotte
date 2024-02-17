@@ -172,7 +172,7 @@ def settings(fenetre) :
 
 
 
-#menu()
+menu()
 
 
 
@@ -188,7 +188,7 @@ def justpathing(image) :
         newPath = os.path.join(fileDirectory, "fond d'écran menu.png")
     elif image == "Jouer" :
         newPath = os.path.join(fileDirectory, "Bouton Jouer.png")
-        
+
     return newPath
 
 
