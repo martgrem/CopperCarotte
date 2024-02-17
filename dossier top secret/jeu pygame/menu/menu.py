@@ -5,6 +5,7 @@ pygame.init()
 
 import random
 import math
+import os
 import sys
 
 
@@ -171,7 +172,7 @@ def settings(fenetre) :
 
 
 
-menu()
+#menu()
 
 
 
@@ -179,8 +180,16 @@ menu()
 
 
 
-
-
+def justpathing(image) :
+    absolutepath = os.path.abspath(__file__)
+    fileDirectory = os.path.dirname(absolutepath)
+    fileDirectory = os.path.dirname(fileDirectory)
+    if image == "fond" :
+        newPath = os.path.join(fileDirectory, "fond d'écran menu.png")
+    elif image == "Jouer" :
+        newPath = os.path.join(fileDirectory, "Bouton Jouer.png")
+        
+    return newPath
 
 
 
