@@ -20,6 +20,9 @@ class letters :
         self.pos = self.img.get_rect()
 
 
+letter = {}
+for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç" :
+    letter[i] = letters(i)
 
 
 
@@ -30,8 +33,9 @@ class guessing :
         self.nom = "lettre" + str(nb)
         self.pos = 0 # un truc du genre : pos du 1er carré + (nb - 1) * (largeur d'un carré + espace entre chaque carré)  pour X
         self.img = pygame.image.load("CopperCarotte/dossier top secret/jeu pygame/play/lettres/noletter.png").convert_alpha() # charge une image vide au début
-        self.img = pygame.transform.scale(self.img, (100, 100))  # resize à la taille de lettre voulue
+        self.img = pygame.transform.scale(self.img, (125, 125))  # resize à la taille de lettre voulue
         self.pos = self.img.get_rect()
+        self.pos[0], self.pos[1] = 150 - self.pos[2]/2 + (self.pos[2]+100)*(nb%7), 650 - self.pos[3]/2 + (self.pos[3]+75)*(nb//7)
 
 
 
@@ -49,8 +53,7 @@ for i in range(1,27) :
 
 
 guessingletter = {}
-for i in range(1,27) :
-    #guessingletter[i] = "lettre" + str(i)
+for i in range(0,13) :
     guessingletter[i] = guessing(i)
 
 
@@ -62,8 +65,9 @@ class guessed :
         self.nom = "guessedletter" + str(nb)
         self.pos = 0 # un truc du genre : pos du 1er carré + ( (nb - 1) % (nblettre/ligne) ) * (largeur d'un carré + espace entre chaque carré) pour X et ( nb // (nblettre/ligne) ) * (largeur d'un carré + espace entre chaque carré)
         self.img = pygame.image.load("CopperCarotte/dossier top secret/jeu pygame/play/lettres/noletter.png").convert_alpha() # charge une image vide au début
-        self.img = pygame.transform.scale(self.img, (100, 100))  # resize à la taille de lettre voulue
+        self.img = pygame.transform.scale(self.img, (75, 75))  # resize à la taille de lettre voulue
         self.pos = self.img.get_rect()
+        self.pos[0], self.pos[1] = 125 - self.pos[2]/2 + (self.pos[2]+50)*(nb%7), 175 - self.pos[3]/2 + (self.pos[3]+25)*(nb//7)
 
 
 
@@ -79,7 +83,7 @@ for i in range(1,27) :
 """
 
 guessedletter = {}
-for i in range(1,27) :
+for i in range(0,43) :
     guessedletter[i] = "lettre" + str(i)
     guessedletter[i] = guessed(i)
 

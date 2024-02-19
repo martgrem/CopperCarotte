@@ -79,17 +79,17 @@ def jeu(fenetre) :
     fond = pygame.transform.scale(fond, pos_fenetre.size)
 
     btn = pygame.image.load("CopperCarotte/dossier top secret/jeu pygame/play/lettres/lettre vide.png").convert()
-    btn = pygame.transform.scale(btn, (100, 100))
+    btn = pygame.transform.scale(btn, (75, 75))
     pos_btn = btn.get_rect()
 
     usedbtn = pygame.image.load("CopperCarotte/dossier top secret/jeu pygame/play/lettres/lettre vide utilisée.png").convert()
-    usedbtn = pygame.transform.scale(usedbtn, (100, 100))
+    usedbtn = pygame.transform.scale(usedbtn, (75, 75))
     pos_usedbtn = usedbtn.get_rect()
     
     btnA =pygame.image.load("CopperCarotte/dossier top secret/jeu pygame/play/lettres/Letter_A.svg.png").convert_alpha()
-    btnA = pygame.transform.scale(btnA, (100, 100))
+    btnA = pygame.transform.scale(btnA, (75, 75))
     pos_btnA = btnA.get_rect()
-    pos_btnA[0], pos_btnA[1] = 500 - pos_btnA[2]/2, 500 - pos_btnA[3]/2
+    pos_btnA[0], pos_btnA[1] = 125 - pos_btnA[2]/2, 175 - pos_btnA[3]/2
     
     fenetre.blit(fond, (0, 0))
 
