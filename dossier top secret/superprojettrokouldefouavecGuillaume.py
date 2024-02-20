@@ -2,16 +2,30 @@ import math as m
 import random as aleajactaest
 import time as t
 import leaderboard
+from pathlib import Path
 #Cela nous permet de voir si le code fonctionne
 #réponses = ["cool", "paradisiaque", "détergent", "ratatouille", "caribou", "notamment", "ridicule", "pastèque", "illustré", "justification"]
-lettres = set("qwertzuiopasdfghjklyxcvbnméèêëàäâîìïôöòûüùÿç ")
+lettres = set("qwertzuiopasdfghjklyxcvbnméèêëàäâîìïôöòûüùÿç-")
 nb_chances = 10
 hard = False
 nb_mots = 1
-dico = open("liste_de_mots_francais_frgut.txt", "r")
-réponses = dico.readlines()
-dico.close()
 
+
+
+
+# Obtenir le chemin complet vers le script courant
+script_path = Path(__file__).resolve()
+
+#récupérer le chemin vers le dossier parent du script courant
+script_dir = script_path.parent
+
+#On ajoute le nom de notre fichier
+path = str(script_dir)+ "/listemotscourants.txt"
+
+#on ouvre le fichier file.txt
+f = open(path)
+
+réponses = f.readlines()
 
 def ltostr(x : list) :
     '''
@@ -74,21 +88,30 @@ def setup() :
     except :
         nb_mots = 1           #valeur par défaut
 
+    
+    
 
 
 
 
-def pendu(x : list) :
+
+
+
+
+def pendu(réponse) :
 
     #choisis un mot aléatoire à faire deviner
     #answer = ltostr(aleajactaest.sample(x, nb_mots))
-    answer = "test" #ltostr(aleajactaest.sample(réponses, nb_mots))
+    answer = ltostr(aleajactaest.sample(réponse, nb_mots))
     answer = answer.strip()
     answer = entertospace(answer)
     
     #ajoute le nombre de "_" correspondant au nombre de lettre du mot
     motvide = "_ "*(len(answer)-1) + "_"
     oùilenest = ["_"]*len(answer)
+    for i, j in enumerate(oùilenest) :
+        if answer[i] == " " :
+            oùilenest[i] = " "
     
     #print(answer)
     nb_essai = 1
@@ -158,7 +181,8 @@ def pendu(x : list) :
         print("Le mot était bien " +  str(answer) + "\nBravo !!!")
     
     print(leaderboard.score(ltostr(oùilenest), nb_essai))
-    leaderboard.highscore((leaderboard.pseudo()),(leaderboard.score(ltostr(oùilenest), nb_essai)))
+    leaderboard.highscore(leaderboard.pseudo(),leaderboard.score(ltostr(oùilenest), nb_essai))
+    
     
 
 #print(entertospace("abc\nefg"))
