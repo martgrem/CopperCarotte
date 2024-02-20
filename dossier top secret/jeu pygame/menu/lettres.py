@@ -7,6 +7,14 @@ import random
 import math
 import sys
 
+
+from pathlib import Path
+script_path = Path(__file__).resolve()
+
+script_dir = str(script_path.parent) + "/fond d'écran menu.png"
+
+
+
 fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
 class letters :
@@ -16,13 +24,80 @@ class letters :
     def __init__(self, lettre) :
         
         self.nom = "lettre" + str(lettre)
-        self.img = pygame.image.load("CopperCarotte/dossier top secret/jeu pygame/play/lettres/" + self.nom + ".png").convert_alpha()
+        self.img = pygame.image.load(str(script_path.parent) + "/lettres/newletters/" + str(self.nom) + ".png").convert()
+        self.img = pygame.transform.scale(self.img, (125, 125))
+        self.usedimg = pygame.image.load(str(script_path.parent) + "/lettres/usedletters/" + str(self.nom) + ".png").convert()
+        self.img = pygame.transform.scale(self.usedimg, (125, 125))
         self.pos = self.img.get_rect()
+        self.pos
+
 
 
 letter = {}
-for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç" :
+for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-" :
     letter[i] = letters(i)
+
+print(letter["-"])
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -52,9 +127,9 @@ for i in range(1,27) :
 """
 
 
-guessingletter = {}
-for i in range(0,13) :
-    guessingletter[i] = guessing(i)
+# guessingletter = {}
+# for i in range(0,13) :
+#     guessingletter[i] = guessing(i)
 
 
 
@@ -82,9 +157,8 @@ for i in range(1,27) :
     guessedletter[i] = guessed(i)
 """
 
-guessedletter = {}
-for i in range(0,43) :
-    guessedletter[i] = "lettre" + str(i)
-    guessedletter[i] = guessed(i)
+# guessedletter = {}
+# for i in range(0,43) :
+#     guessedletter[i] = guessed(i)
 
-print(guessingletter[5])
+# print(guessingletter[5])
