@@ -75,6 +75,7 @@ def jeu(fenetre) :
     
     #fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     pos_fenetre = fenetre.get_rect()
+    print(pos_fenetre.size)
     fond = pygame.image.load("CopperCarotte/dossier top secret/jeu pygame/menu/fond d'écran menu.jpg").convert()
     fond = pygame.transform.scale(fond, pos_fenetre.size)
 
