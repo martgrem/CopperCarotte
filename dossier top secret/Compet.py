@@ -91,6 +91,7 @@ def setup() :
     
     
 
+    
 
 
 
@@ -98,20 +99,17 @@ def setup() :
 
 
 
-def pendu(réponse) :
+def pendu(réponse_dans_la_fonction) :
 
     #choisis un mot aléatoire à faire deviner
     #answer = ltostr(aleajactaest.sample(x, nb_mots))
-    answer = ltostr(aleajactaest.sample(réponse, nb_mots))
+    answer = ltostr(aleajactaest.sample(réponse_dans_la_fonction, nb_mots))
     answer = answer.strip()
     answer = entertospace(answer)
     
     #ajoute le nombre de "_" correspondant au nombre de lettre du mot
     motvide = "_ "*(len(answer)-1) + "_"
     oùilenest = ["_"]*len(answer)
-    for i, j in enumerate(oùilenest) :
-        if answer[i] == " " :
-            oùilenest[i] = " "
     
     #print(answer)
     nb_essai = 1
@@ -184,12 +182,16 @@ def pendu(réponse) :
     leaderboard.highscore(leaderboard.pseudo(),leaderboard.score(ltostr(oùilenest), nb_essai))
     
     
+    
+def competition (pendu) :
+    x = 10
+    if input ("Mode compétitf ?").lower in {"oui","yes", "ouais", "avec plaisir", "je vous en saurais fort gré"} :
+        for x in range :
+            pendu(réponses)
+
 
 #print(entertospace("abc\nefg"))
 setup()
-pendu(réponses)
-
-
-
+competition(pendu)
 
 
