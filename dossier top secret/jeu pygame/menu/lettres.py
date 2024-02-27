@@ -19,11 +19,10 @@ fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
 class letters :
 
-
-
     def __init__(self, lettre) :
         
         self.nom = "lettre" + str(lettre)
+        self.guess = False
         self.img = pygame.image.load(str(script_path.parent) + "/lettres/newletters/" + str(self.nom) + ".png").convert()
         self.img = pygame.transform.scale(self.img, (125, 125))
         self.usedimg = pygame.image.load(str(script_path.parent) + "/lettres/usedletters/" + str(self.nom) + ".png").convert()
