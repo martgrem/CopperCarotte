@@ -29,15 +29,15 @@ class letters :
         self.usedimg = pygame.image.load(str(script_path.parent) + "/lettres/usedletters/" + str(self.nom) + ".png").convert()
         self.img = pygame.transform.scale(self.usedimg, (125, 125))
         self.pos = self.img.get_rect()
-        self.pos
+        self.usedpos = self.usedimg.get_rect()
+        self.usedpos = self.pos
 
 
-
-letter = {}
+lettre = {}
 for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-" :
-    letter[i] = letters(i)
+    lettre[i] = letters(i)
 
-print(letter["-"])
+print(lettre["-"])
 
 
 
