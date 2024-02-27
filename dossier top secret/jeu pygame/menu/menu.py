@@ -18,6 +18,7 @@ def menu() :
 
     fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     pos_fenetre = fenetre.get_rect()
+    print(pos_fenetre)
     fond = pygame.image.load("CopperCarotte/dossier top secret/jeu pygame/menu/fond d'écran menu.jpg").convert()
     fond = pygame.transform.scale(fond, pos_fenetre.size)
 
@@ -150,10 +151,10 @@ def settings(fenetre) :
     fond = pygame.image.load("CopperCarotte/dossier top secret/jeu pygame/menu/fond d'écran menu.jpg").convert()
     fond = pygame.transform.scale(fond, pos_fenetre.size)
 
-    boum = pygame.image.load("neauteubouqueux/PyGame/BOUM.png").convert_alpha()
-    boum = pygame.transform.scale(boum, (1000, 1000))
+    #boum = pygame.image.load("neauteubouqueux/PyGame/BOUM.png").convert_alpha()
+    #boum = pygame.transform.scale(boum, (1000, 1000))
     fenetre.blit(fond, (0, 0))
-    fenetre.blit(boum, (250, 0))
+    #fenetre.blit(boum, (250, 0))
     pygame.display.flip()
     while cont:    
         
