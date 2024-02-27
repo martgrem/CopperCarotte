@@ -27,6 +27,7 @@ f = open(path)
 
 réponses = f.readlines()
 
+
 def ltostr(x : list) :
     '''
     convertit une liste en string
@@ -72,21 +73,11 @@ def setup() :
     '''
     Choisis la difficulté
     '''
-    global hard
     global nb_chances
     global nb_mots
-    if input("Mode difficile ?").lower in {"oui","yes", "ouais", "avec plaisir", "je vous en saurais fort gré"} :
-        hard = True
-    else :
-        hard = False        #valeur par défaut
-    try :
-        nb_chances = int(input("Nombre d'erreurs maximum ?"))
-    except :
-        nb_chances = 10     #valeur par défaut
-    try :
-        nb_mots = int(input("Nombre de mots à deviner ?"))
-    except :
-        nb_mots = 1           #valeur par défaut
+    nb_chances =8
+    nb_mots = 1
+
 
     
     
@@ -101,9 +92,13 @@ def setup() :
 
 def pendu(réponse_dans_la_fonction) :
 
+    global nb_essai
+    global oùilenest
+
     #choisis un mot aléatoire à faire deviner
     #answer = ltostr(aleajactaest.sample(x, nb_mots))
-    answer = ltostr(aleajactaest.sample(réponse_dans_la_fonction, nb_mots))
+    answer =("test")
+    #answer = ltostr(aleajactaest.sample(réponse_dans_la_fonction, nb_mots))
     answer = answer.strip()
     answer = entertospace(answer)
     
@@ -115,6 +110,8 @@ def pendu(réponse_dans_la_fonction) :
     nb_essai = 1
     essayés = []
     
+    
+
     #Petite intro
     print("Bonjour !")
     t.sleep(0.5)
@@ -126,13 +123,14 @@ def pendu(réponse_dans_la_fonction) :
     #Boucle qui vérifie que le nombre d'essai effectué par le joueur ne dépasse pas le nombre d'essai maximu autorisé par de niveau de difficulté
     while "_" in oùilenest and nb_essai <= nb_chances :
         essai = input("Une lettre ?").lower()
-        t.sleep(0.5)
-        print(".")
-        t.sleep(0.5)
-        print(". .")
-        t.sleep(0.5)
-        print(". . .")
-        t.sleep(0.5)
+       # t.sleep(0.5)
+        #print(".")
+        #t.sleep(0.5)
+        #print(". .")
+        #t.sleep(0.5)
+       # print(". . .")
+    
+        #t.sleep(0.5)
         if essai == answer :
             for numlettre, lettre in enumerate(answer) :
                 oùilenest[numlettre] = lettre
@@ -178,20 +176,30 @@ def pendu(réponse_dans_la_fonction) :
     else :
         print("Le mot était bien " +  str(answer) + "\nBravo !!!")
     
+    
+    
+    
+    
+def competition () :
+    global compet
+    global réponses
+    compet = True
+       
+    if compet == True : 
+        for i in range(10) :
+            pendu(réponses)
+            
+    else :
+        pendu(réponses)
+    
     print(leaderboard.score(ltostr(oùilenest), nb_essai))
+   
     leaderboard.highscore(leaderboard.pseudo(),leaderboard.score(ltostr(oùilenest), nb_essai))
     
-    
-    
-def competition (pendu) :
-    x = 10
-    if input ("Mode compétitf ?").lower in {"oui","yes", "ouais", "avec plaisir", "je vous en saurais fort gré"} :
-        for x in range :
-            pendu(réponses)
 
 
 #print(entertospace("abc\nefg"))
 setup()
-competition(pendu)
+competition()
 
 
