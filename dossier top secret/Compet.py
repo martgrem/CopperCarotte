@@ -80,7 +80,11 @@ def setup() :
 
 
     
-    
+def intro () :
+    print("Bonjour !")
+    t.sleep(0.5)
+    print("Bonne chance !")
+    t.sleep(0.5)   
 
     
 
@@ -113,10 +117,7 @@ def pendu(réponse_dans_la_fonction) :
     
 
     #Petite intro
-    print("Bonjour !")
-    t.sleep(0.5)
-    print("Bonne chance !")
-    t.sleep(0.5)
+  
     print("Le mot est", motvide)
     t.sleep(0.5)
 
@@ -180,26 +181,39 @@ def pendu(réponse_dans_la_fonction) :
     
     
     
+    
+    
 def competition () :
+    
+    
     global compet
     global réponses
+    global v
     compet = True
-       
-    if compet == True : 
-        for i in range(10) :
+    v=0  
+    if compet == True :  
+         for i in range(10) :
             pendu(réponses)
+            x = leaderboard.score(ltostr(oùilenest), nb_essai)
+            print(leaderboard.score(ltostr(oùilenest), nb_essai))
+            v = v+x
+            print(v)
+
+
             
     else :
         pendu(réponses)
+    return v
     
-    print(leaderboard.score(ltostr(oùilenest), nb_essai))
-   
-    leaderboard.highscore(leaderboard.pseudo(),leaderboard.score(ltostr(oùilenest), nb_essai))
+ 
+setup()
+intro()
+leaderboard.highscore(leaderboard.pseudo(),competition())
     
 
 
 #print(entertospace("abc\nefg"))
-setup()
-competition()
+
+
 
 
