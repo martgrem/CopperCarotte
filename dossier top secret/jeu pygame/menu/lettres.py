@@ -26,7 +26,7 @@ class letters :
         self.img = pygame.image.load(str(script_path.parent) + "/lettres/newletters/" + str(self.nom) + ".png").convert()
         self.img = pygame.transform.scale(self.img, (125, 125))
         self.usedimg = pygame.image.load(str(script_path.parent) + "/lettres/usedletters/" + str(self.nom) + ".png").convert()
-        self.img = pygame.transform.scale(self.usedimg, (125, 125))
+        self.usedimg = pygame.transform.scale(self.usedimg, (125, 125))
         self.pos = self.img.get_rect()
         self.usedpos = self.usedimg.get_rect()
         self.usedpos = self.pos
@@ -47,7 +47,21 @@ print(lettre["-"])
 
 
 
-
+def position(n : int, lx, ly) :
+    '''
+    calculer les coordonées du bouton correspondant à chaque lettre
+    n = nombre de la lettre
+    lx, ly = dimensions de la lettre
+    '''
+    ox, oy = 0, 0
+    lenx = 7
+    xspace = lx/4
+    yspace = ly/4
+    vx = ox + n%lenx*(lx + xspace)
+    vy = oy + n//lenx*(ly + yspace)
+    if n//lenx%2 == 1 :
+        vx += lx/2
+    return vx, vy
 
 
 
