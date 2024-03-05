@@ -10,8 +10,18 @@ import sys
 
 from pathlib import Path
 script_path = Path(__file__).resolve()
-
+print(script_path)
 import lettres
+import game
+
+
+hard = False
+essayés = []
+
+
+
+
+
 
 def menu() :
 
@@ -74,17 +84,19 @@ def menu() :
 
 def jeu(fenetre) :
     cont = True
+    if hard :
+        f = open(str(script_path.parent.parent.parent)+"/liste_de_mots_français_frgut.txt")
+    else :
+        f = open(str(script_path.parent.parent.parent)+"/listemotscourants.txt")
+    réponses = f.readlines()
+    f.close()
+    answer, oùilenest, nb_essais = game.init(réponses)
     
     #fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     pos_fenetre = fenetre.get_rect()
     print(pos_fenetre.size)
     fond = pygame.image.load(str(script_path.parent) + "/fond d'écran menu.jpg").convert()
     fond = pygame.transform.scale(fond, pos_fenetre.size)
-    
-    btnA =pygame.image.load("CopperCarotte/dossier top secret/jeu pygame/play/lettres/Letter_A.svg.png").convert_alpha()
-    btnA = pygame.transform.scale(btnA, (125, 125))
-    pos_btnA = btnA.get_rect()
-    pos_btnA[0], pos_btnA[1] = 150 - pos_btnA[2]/2, 650 - pos_btnA[3]/2
         
     lettre = {}
     for j, i in enumerate("ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-") :
@@ -189,8 +201,18 @@ def jeu(fenetre) :
 
 
                     for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-" :
-                        if lettre[i].wanted_pos[0] <= mspos[0] <= lettre[i].wanted_pos[0] + lettre[i].ln and lettre[i].wanted_pos[1] <= mspos[1] <= lettre[i].wanted_pos[1] + lettre[i].ln :
+                        if lettre[i].wanted_pos[0] <= mspos[0] <= lettre[i].wanted_pos[0] + lettre[i].ln and lettre[i].wanted_pos[1] <= mspos[1] <= lettre[i].wanted_pos[1] + lettre[i].ln and not lettre[i].guess:
                             lettre[i].guess = True
+                            lettre[i].justguess =True
+
+            for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-" :
+                if lettre[i].justguess :
+                    lettre[i].justguess = False
+                    justesse, pénalité, oùilenest, essayés = game.deviner(answer, oùilenest, hard, essayés, lettre[i].nom)
+                    if pénalité :
+                        nb_essais += 1
+                    if not justesse :
+                        pass
 
 
 

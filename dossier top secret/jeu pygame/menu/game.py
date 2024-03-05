@@ -6,7 +6,17 @@ import os
 import sys
 
 from pathlib import Path
-script_path = Path(__file__).resolve()
+path = Path(__file__).resolve()
+# print(path)
+# print(sys.path)
+sys.path.append(str(path.parent.parent.parent))
+# print(sys.path)
+import superprojettrokouldefouavecGuillaume
+
+
+
+
+
 
 import lettres
 
@@ -16,16 +26,97 @@ import time as t
 import leaderboard
 #Cela nous permet de voir si le code fonctionne
 #réponses = ["cool", "paradisiaque", "détergent", "ratatouille", "caribou", "notamment", "ridicule", "pastèque", "illustré", "justification"]
-lettres = set("qwertzuiopasdfghjklyxcvbnméèêëàäâîìïôöòûüùÿç-")
+alphabet = set("qwertzuiopasdfghjklyxcvbnméèêëàäâîìïôöòûüùÿç-")
 nb_chances = 10
 hard = False
-nb_mots = 1
+
+
+f = open(str(path.parent.parent.parent)+"/listemotscourants.txt")
+réponses = f.readlines()
 
 
 
 
-def deviner(x : str) :
 
+def ltostr(x : list) :
+    '''
+    convertit une liste en string
+    '''
+    z = ""
+    for i in x :
+        z += str(i)
+    return z
+
+
+
+
+def entertospace(x : str) :
+    y = list(x)
+    for i, j in enumerate(y) :
+        if j == "\n" :
+            y[i] = " "
+    return ltostr(y)
+
+
+
+
+
+# def setup() :
+#     '''
+#     Choisis la difficulté
+#     '''
+#     if input("Mode difficile ?").lower in {"oui","yes", "ouais", "avec plaisir", "je vous en saurais fort gré"} :
+#         hard = True
+#     else :
+#         hard = False        #valeur par défaut
+#     try :
+#         nb_chances = int(input("Nombre d'erreurs maximum ?"))
+#     except :
+#         nb_chances = 10     #valeur par défaut
+#     try :
+#         nb_mots = int(input("Nombre de mots à deviner ?"))
+#     except :
+#         nb_mots = 1           #valeur par défaut
+
+
+
+
+
+
+
+def init(réponses) :
+            #choisis un mot aléatoire à faire deviner
+    #answer = ltostr(aleajactaest.sample(x, nb_mots))
+    answer = ltostr(aleajactaest.sample(réponses, 1))
+    answer = answer.strip()
+    answer = entertospace(answer)
+    
+    #ajoute le nombre de "_" correspondant au nombre de lettre du mot
+    oùilenest = ["_"]*len(answer)
+    for i, j in enumerate(oùilenest) :
+        if answer[i] == " " :
+            oùilenest[i] = " "
+
+    nb_essais = 1
+
+    return answer, oùilenest, nb_essais
+
+
+
+def deviner(réponse, oùilenest, hard, essayés, guess) :
+
+    #Commande qui ne pénalise pas le fait qu'un joueur réessaie une lettre
+    if guess in essayés :
+        return False, hard, oùilenest, essayés
+    else :
+        essayés.append(guess)
+        if guess in réponse :
+            for pos, letter in enumerate(réponse) :
+                if guess == letter :
+                    oùilenest[pos] = guess
+            return True, hard, oùilenest, essayés
+        else :
+            return False, True, oùilenest, essayés
 
 
 
