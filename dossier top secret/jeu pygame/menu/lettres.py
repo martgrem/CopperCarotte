@@ -76,6 +76,7 @@ class letters :
         self.nom = "lettre" + str(lettre)
         self.ln = 125
         self.guess = False
+        self.justguessed = False
         self.img = pygame.image.load(str(script_path.parent) + "/lettres/newletters/" + str(self.nom) + ".png").convert()
         self.img = pygame.transform.scale(self.img, (125, 125))
         self.usedimg = pygame.image.load(str(script_path.parent) + "/lettres/usedletters/" + str(self.nom) + ".png").convert()
