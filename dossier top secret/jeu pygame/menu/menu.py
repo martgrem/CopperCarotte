@@ -151,7 +151,7 @@ def jeu(fenetre) :
                     lettre["B"].justguessed =True
                 elif event.key == K_c :
                     lettre["C"].guess = True
-                    lettre["c"].justguessed =True
+                    lettre["C"].justguessed =True
                 elif event.key == K_d :
                     lettre["D"].guess = True
                     lettre["D"].justguessed =True
