@@ -107,14 +107,14 @@ def deviner(réponse, oùilenest, hard, essayés, guess) :
 
     #Commande qui ne pénalise pas le fait qu'un joueur réessaie une lettre
     if guess in essayés :
-        return False, hard, oùilenest, essayés
+        return False, False, oùilenest, essayés
     else :
         essayés.append(guess)
         if guess in réponse :
             for pos, letter in enumerate(réponse) :
                 if guess == letter :
                     oùilenest[pos] = guess
-            return True, hard, oùilenest, essayés
+            return True, False, oùilenest, essayés
         else :
             return False, True, oùilenest, essayés
 
