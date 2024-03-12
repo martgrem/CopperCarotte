@@ -49,7 +49,7 @@ def p1(x) :
 
 def lendiffletters(x : (str or list)) :
     '''
-    Compter le nombre de lettre différent
+    Compter le nombre de lettres différentes
     '''
     y = []
     for i in x :
@@ -186,8 +186,8 @@ def pendu(réponse) :
     
 
 #print(entertospace("abc\nefg"))
-setup()
-pendu(réponses)
+# setup()
+# pendu(réponses)
 
 
 

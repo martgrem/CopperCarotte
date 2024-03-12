@@ -17,46 +17,85 @@ script_dir = str(script_path.parent) + "/fond d'écran menu.png"
 
 fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
+
+
+
+
+
+
+def position(n : int, lx, ly) :
+    '''
+    calculer les coordonées du bouton correspondant à chaque lettre
+    n = nombre de la lettre
+    lx, ly = dimensions de la lettre
+    '''
+    ox, oy = 25, 9
+    xspace = lx/4
+    yspace = ly/4
+
+    xpos, ypos = calcpos(n)    # position ou 1 lettre = 1 unité
+
+    vx = ox + xpos*(lx + xspace) # position en pixels
+    vy = oy + ypos*(ly + yspace)
+    if ypos%2 == 0 :
+        vx += lx/2
+    return vx, vy
+
+
+
+
+
+
+def calcpos(n : int) :
+    '''
+    renvoie la ligne et la colonnne sur lesquelles se trouve la n-ème lettre (part de 0)
+    '''
+    c = 0
+    l = -1 #no de ligne
+    while True :
+        n -= 6 + c
+        l += 1
+        if n < 0 :
+            return n + 6 + c, l
+        
+        c = (c+1)%2
+
+
+
+
+
+
+
+
+
+
 class letters :
 
-
-
-    def __init__(self, lettre) :
+    def __init__(self, lettre, nb) :
         
         self.nom = "lettre" + str(lettre)
+        self.ln = 125
+        self.guess = False
+        self.justguessed = False
         self.img = pygame.image.load(str(script_path.parent) + "/lettres/newletters/" + str(self.nom) + ".png").convert()
         self.img = pygame.transform.scale(self.img, (125, 125))
         self.usedimg = pygame.image.load(str(script_path.parent) + "/lettres/usedletters/" + str(self.nom) + ".png").convert()
-        self.img = pygame.transform.scale(self.usedimg, (125, 125))
+        self.usedimg = pygame.transform.scale(self.usedimg, (125, 125))
         self.pos = self.img.get_rect()
         self.usedpos = self.usedimg.get_rect()
-        self.usedpos = self.pos
+        self.wanted_pos = position(nb, self.ln, self.ln)
 
 
 lettre = {}
-for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-" :
-    lettre[i] = letters(i)
+for j, i in enumerate("ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-") :
+    lettre[i] = letters(i, j)
 
 print(lettre["-"])
 
-
+print(lettre["-"].wanted_pos)
 
 
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
