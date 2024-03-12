@@ -151,76 +151,76 @@ def jeu(fenetre) :
                     lettre["B"].justguessed =True
                 elif event.key == K_c :
                     lettre["C"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["c"].justguessed =True
                 elif event.key == K_d :
                     lettre["D"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["D"].justguessed =True
                 elif event.key == K_e :
                     lettre["E"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["E"].justguessed =True
                 elif event.key == K_f :
                     lettre["F"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["F"].justguessed =True
                 elif event.key == K_g :
                     lettre["G"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["G"].justguessed =True
                 elif event.key == K_h :
                     lettre["H"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["H"].justguessed =True
                 elif event.key == K_i :
                     lettre["I"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["I"].justguessed =True
                 elif event.key == K_j :
                     lettre["J"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["J"].justguessed =True
                 elif event.key == K_k :
                     lettre["K"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["K"].justguessed =True
                 elif event.key == K_l :
                     lettre["L"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["L"].justguessed =True
                 elif event.key == K_m :
                     lettre["M"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["M"].justguessed =True
                 elif event.key == K_n :
                     lettre["N"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["N"].justguessed =True
                 elif event.key == K_o :
                     lettre["O"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["O"].justguessed =True
                 elif event.key == K_p :
                     lettre["P"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["P"].justguessed =True
                 elif event.key == K_q :
                     lettre["Q"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["Q"].justguessed =True
                 elif event.key == K_r :
                     lettre["R"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["R"].justguessed =True
                 elif event.key == K_s :
                     lettre["S"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["S"].justguessed =True
                 elif event.key == K_t :
                     lettre["T"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["T"].justguessed =True
                 elif event.key == K_u :
                     lettre["U"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["U"].justguessed =True
                 elif event.key == K_v :
                     lettre["V"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["V"].justguessed =True
                 elif event.key == K_w :
                     lettre["W"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["W"].justguessed =True
                 elif event.key == K_x :
                     lettre["X"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["X"].justguessed =True
                 elif event.key == K_y :
                     lettre["Y"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["Y"].justguessed =True
                 elif event.key == K_z :
                     lettre["Z"].guess = True
-                    lettre["B"].justguessed =True
+                    lettre["Z"].justguessed =True
 
             if event.type == MOUSEBUTTONDOWN :
                 if pygame.mouse.get_pressed()[0] :
