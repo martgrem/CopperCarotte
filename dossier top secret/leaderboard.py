@@ -21,7 +21,13 @@ def diffletters(x : (str or list)) :
 
 
 def pseudo() :
-    pseudo = input("Choisissez un pseudonyme à utiliser lors de vos aventures dans le monde fascinant de l'éxecution publique.")
+    pseudo = input("Choisissez un pseudonyme à utiliser lors de vos aventures dans le monde fascinant de l'éxecution publique. (3 lettres max), VIVE LE MODE ARCADE")
+    
+    if len(pseudo) < 3 :
+        pseudo = pseudo + "___"
+    
+    pseudo = pseudo[:3]
+    
     return pseudo
     
 
