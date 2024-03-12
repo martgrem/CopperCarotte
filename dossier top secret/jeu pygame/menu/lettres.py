@@ -90,9 +90,9 @@ lettre = {}
 for j, i in enumerate("ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-") :
     lettre[i] = letters(i, j)
 
-print(lettre["-"])
+# print(lettre["-"])
 
-print(lettre["-"].wanted_pos)
+# print(lettre["-"].wanted_pos)
 
 
  

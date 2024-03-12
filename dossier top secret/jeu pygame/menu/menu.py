@@ -16,7 +16,6 @@ import game
 
 
 hard = False
-essayés = []
 
 
 
@@ -84,6 +83,8 @@ def menu() :
 
 def jeu(fenetre) :
     cont = True
+    global hard
+    essayés = []
     if hard :
         f = open(str(script_path.parent.parent.parent)+"/liste_de_mots_français_frgut.txt")
     else :
@@ -203,11 +204,11 @@ def jeu(fenetre) :
                     for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-" :
                         if lettre[i].wanted_pos[0] <= mspos[0] <= lettre[i].wanted_pos[0] + lettre[i].ln and lettre[i].wanted_pos[1] <= mspos[1] <= lettre[i].wanted_pos[1] + lettre[i].ln and not lettre[i].guess:
                             lettre[i].guess = True
-                            lettre[i].justguess =True
+                            lettre[i].justguessed =True
 
             for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-" :
-                if lettre[i].justguess :
-                    lettre[i].justguess = False
+                if lettre[i].justguessed :
+                    lettre[i].justguessed = False
                     justesse, pénalité, oùilenest, essayés = game.deviner(answer, oùilenest, hard, essayés, lettre[i].nom)
                     if pénalité :
                         nb_essais += 1
