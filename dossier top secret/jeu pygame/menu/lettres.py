@@ -38,7 +38,7 @@ def position(n : int, lx, ly) :
     vx = ox + xpos*(lx + xspace) # position en pixels
     vy = oy + ypos*(ly + yspace)
     if ypos%2 == 0 :
-        vx += lx/2
+        vx += lx/2 + xspace/2
     return vx, vy
 
 
