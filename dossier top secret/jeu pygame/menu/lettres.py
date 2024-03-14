@@ -29,9 +29,9 @@ def position(n : int, lx, ly) :
     n = nombre de la lettre
     lx, ly = dimensions de la lettre
     '''
-    ox, oy = 25, 9
-    xspace = lx/4
-    yspace = ly/4
+    ox, oy = 64, 63
+    xspace = lx/3
+    yspace = ly/3
 
     xpos, ypos = calcpos(n)    # position ou 1 lettre = 1 unité
 
