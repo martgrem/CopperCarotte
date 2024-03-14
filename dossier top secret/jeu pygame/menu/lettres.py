@@ -29,7 +29,7 @@ def position(n : int, lx, ly) :
     n = nombre de la lettre
     lx, ly = dimensions de la lettre
     '''
-    ox, oy = 75, 63
+    ox, oy = 64, 63
     xspace = lx/3
     yspace = ly/3
 
