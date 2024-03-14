@@ -3,7 +3,7 @@ from pygame.locals import *
 pygame.init()
 
 
-import random
+import random as aleajactaest
 import math
 import os
 import sys
@@ -16,7 +16,7 @@ import game
 
 
 hard = False
-
+bordel = True
 
 
 
@@ -102,8 +102,12 @@ def jeu(fenetre) :
     fond = pygame.transform.scale(fond, pos_fenetre.size)
         
     lettre = {}
-    for j, i in enumerate("ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-") :
-        lettre[i] = lettres.letters(i, j)
+    if bordel :
+        for j, i in enumerate(aleajactaest.sample("ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-", len("ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-")) :
+            lettre[i] = lettres.letters(i, j)
+    else :
+        for j, i in enumerate("ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-") :
+            lettre[i] = lettres.letters(i, j)
 
     print(lettre["-"])
 
