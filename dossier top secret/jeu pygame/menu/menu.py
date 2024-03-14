@@ -31,15 +31,15 @@ def menu() :
     fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     pos_fenetre = fenetre.get_rect()
     print(pos_fenetre)
-    fond = pygame.image.load("CopperCarotte/dossier top secret/jeu pygame/menu/fond d'écran menu.jpg").convert()
+    fond = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
     fond = pygame.transform.scale(fond, pos_fenetre.size)
 
-    playbtn = pygame.image.load("CopperCarotte/dossier top secret/jeu pygame/menu/boutons menu/Bouton Jouer.png").convert()
+    playbtn = pygame.image.load(str(script_path.parent)+"/boutons menu/Bouton Jouer.png").convert()
     pos_playbtn = playbtn.get_rect()
     playbtn = pygame.transform.scale(playbtn, (588, 232))
     pos_playbtn[0], pos_playbtn[1] = pos_fenetre.size[0]/2 - pos_playbtn[2]/2, pos_fenetre.size[1]/2 - pos_playbtn[3]/2 - 200
 
-    setbtn = pygame.image.load("CopperCarotte/dossier top secret/jeu pygame/menu/boutons menu/Bouton Paramètres.png").convert()
+    setbtn = pygame.image.load(str(script_path.parent)+"/boutons menu/Bouton Paramètres.png").convert()
     pos_setbtn = setbtn.get_rect()
     setbtn = pygame.transform.scale(setbtn, (744, 232))
     pos_setbtn[0], pos_setbtn[1] = pos_fenetre.size[0]/2 - pos_setbtn[2]/2, pos_fenetre.size[1]/2 - pos_setbtn[3]/2 + 100
