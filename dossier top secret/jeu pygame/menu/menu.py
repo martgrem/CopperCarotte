@@ -10,7 +10,7 @@ import sys
 
 from pathlib import Path
 script_path = Path(__file__).resolve()
-print(script_path)
+#print(script_path)
 import lettres
 import game
 
