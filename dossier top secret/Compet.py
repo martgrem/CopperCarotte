@@ -124,12 +124,12 @@ def pendu(réponse_dans_la_fonction) :
     #Boucle qui vérifie que le nombre d'essai effectué par le joueur ne dépasse pas le nombre d'essai maximu autorisé par de niveau de difficulté
     while "_" in oùilenest and nb_essai <= nb_chances :
         essai = input("Une lettre ?").lower()
-       # t.sleep(0.5)
-        #print(".")
-        #t.sleep(0.5)
-        #print(". .")
-        #t.sleep(0.5)
-       # print(". . .")
+        t.sleep(0.5)
+        print(".")
+        t.sleep(0.5)
+        print(". .")
+        t.sleep(0.5)
+        print(". . .")
     
         #t.sleep(0.5)
         if essai == answer :
