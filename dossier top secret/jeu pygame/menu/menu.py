@@ -23,7 +23,9 @@ bordel = True
 
 
 def menu() :
-
+    '''
+    Créé le menu avec tous les bouttons
+    '''
 
 
     fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
