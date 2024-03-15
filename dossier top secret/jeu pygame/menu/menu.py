@@ -16,7 +16,7 @@ import game
 
 
 hard = False
-bordel = True
+bordel = aleajactaest.choice("0100")
 
 
 
@@ -117,7 +117,6 @@ def jeu(fenetre) :
     while cont:    
         
         fenetre.blit(fond, (0, 0))
-
 
         for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-" :
             if not lettre[i].guess : #si la lettre n'est pas encore essayée        (à faire pour toutes les lettres)
