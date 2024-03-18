@@ -13,11 +13,13 @@ script_path = Path(__file__).resolve()
 #print(script_path)
 import lettres
 import game
+import skinpendu
+import devinage
 
 
 hard = False
 bordel = aleajactaest.choice("0100")
-
+nb_essais = 20
 
 
 
@@ -86,6 +88,7 @@ def menu() :
 def jeu(fenetre) :
     cont = True
     global hard
+    global nb_essais
     essayés = []
     if hard :
         f = open(str(script_path.parent.parent.parent)+"/liste_de_mots_français_frgut.txt")
@@ -93,8 +96,9 @@ def jeu(fenetre) :
         f = open(str(script_path.parent.parent.parent)+"/listemotscourants.txt")
     réponses = f.readlines()
     f.close()
-    answer, oùilenest, nb_essais = game.init(réponses)
-    
+    answer, oùilenest = game.init(réponses)
+    answer = "testabab"    # pour les tests
+    print(answer,oùilenest)
     #fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     pos_fenetre = fenetre.get_rect()
     print(pos_fenetre.size)
@@ -109,7 +113,16 @@ def jeu(fenetre) :
         for j, i in enumerate("ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-") :
             lettre[i] = lettres.letters(i, j)
 
-    print(lettre["-"])
+    #print(lettre["-"])
+    
+    skin = {}
+    for j, i in enumerate(skinpendu.skinchoice(nb_essais)) :
+        skin[j+1] = skinpendu.skins(i)
+    indskin = 1
+
+    devining = {}
+    for i in range(1, 21) :
+        devining[i] = devinage.deviningletters(i)
 
     pygame.display.flip()
 
@@ -124,7 +137,10 @@ def jeu(fenetre) :
             elif lettre[i].guess : #si la lettre n'est pas encore essayée        (à faire pour toutes les lettres)
                 fenetre.blit(lettre[i].usedimg, lettre[i].wanted_pos)
 
+        fenetre.blit(skin[indskin].img, (1400, 300))
 
+        for i in range(1, 11) :
+            fenetre.blit(devining[i].img, devining[i].wanted_pos)
 
             # exemple pour une seule lettre
         # if not guessA : #si a n'est pas encore essayé        (à faire pour toutes les lettres)
@@ -240,13 +256,15 @@ def jeu(fenetre) :
             for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-" :
                 if lettre[i].justguessed :
                     lettre[i].justguessed = False
-                    justesse, pénalité, oùilenest, essayés = game.deviner(answer, oùilenest, hard, essayés, lettre[i].nom)
+                    justesse, pénalité, oùilenest, essayés = game.deviner(answer, oùilenest, essayés, i.lower())
                     if pénalité :
-                        nb_essais += 1
+                        if indskin < len(skin):
+                            indskin+= 1
                     if not justesse :
                         pass
-
-
+                    
+                    for i in range(1, len(answer)) :
+                        devining[i].write(oùilenest[i-1])
 
 
 def settings(fenetre) :

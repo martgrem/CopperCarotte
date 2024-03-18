@@ -97,15 +97,14 @@ def init(réponses) :
         if answer[i] == " " :
             oùilenest[i] = " "
 
-    nb_essais = 1
 
-    return answer, oùilenest, nb_essais
-
+    return answer, oùilenest
 
 
-def deviner(réponse, oùilenest, hard, essayés, guess) :
 
-    #Commande qui ne pénalise pas le fait qu'un joueur réessaie une lettre
+def deviner(réponse, oùilenest,  essayés, guess) :
+
+    #Commande qui ne pénalise pas le fait qu'un joueur réessaie une lettre (au cas où ça arrive on la laisse)
     if guess in essayés :
         return False, False, oùilenest, essayés
     else :
@@ -123,7 +122,7 @@ def deviner(réponse, oùilenest, hard, essayés, guess) :
 
 
 
-
+print(init("testabab"))
 
 
 
