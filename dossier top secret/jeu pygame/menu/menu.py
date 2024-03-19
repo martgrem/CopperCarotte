@@ -32,7 +32,7 @@ def menu() :
 
     fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     pos_fenetre = fenetre.get_rect()
-    print(pos_fenetre)
+    #print(pos_fenetre)
     fond = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
     fond = pygame.transform.scale(fond, pos_fenetre.size)
 
@@ -97,7 +97,7 @@ def jeu(fenetre) :
     réponses = f.readlines()
     f.close()
     answer, oùilenest = game.init(réponses)
-    answer = "testabab"    # pour les tests
+    answer, oùilenest = game.init(["testabab"])    # pour les tests
     print(answer,oùilenest)
     #fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     pos_fenetre = fenetre.get_rect()
@@ -139,7 +139,7 @@ def jeu(fenetre) :
 
         fenetre.blit(skin[indskin].img, (1400, 300))
 
-        for i in range(1, 11) :
+        for i in range(1, len(answer)) :
             fenetre.blit(devining[i].img, devining[i].wanted_pos)
 
             # exemple pour une seule lettre

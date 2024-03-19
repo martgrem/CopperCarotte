@@ -47,7 +47,7 @@ def position(n : int, lx, ly) :
     xspace = lx/3
     yspace = ly/3
 
-    xpos, ypos = calcpos(n)    # position ou 1 lettre = 1 unité
+    xpos, ypos = calcpos(n-1)    # position ou 1 lettre = 1 unité
 
     vx = ox + xpos*(lx + xspace) # position en pixels
     vy = oy + ypos*(ly + yspace)
@@ -92,7 +92,7 @@ class deviningletters :
 # for i in range(19) :
 #     devining[i+1] = deviningletters(i+1)
 
-# print(x)
+# print(x.wanted_pos)
 
 
 

@@ -122,9 +122,9 @@ def deviner(réponse, oùilenest,  essayés, guess) :
 
 
 
-print(init("testabab"))
+# print(init(["testabab"]))
 
-
+# print(deviner('testabab', ['_', '_', '_', '_', '_', '_', '_', '_'], [], "a"))
 
 
 

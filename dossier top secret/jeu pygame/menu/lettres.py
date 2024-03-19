@@ -86,9 +86,9 @@ class letters :
         self.wanted_pos = position(nb, self.ln, self.ln)
 
 
-lettre = {}
-for j, i in enumerate("ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-") :
-    lettre[i] = letters(i, j)
+# lettre = {}
+# for j, i in enumerate("ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-") :
+#     lettre[i] = letters(i, j)
 
 # print(lettre["-"])
 
