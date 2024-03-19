@@ -97,7 +97,7 @@ def jeu(fenetre) :
     réponses = f.readlines()
     f.close()
     answer, oùilenest = game.init(réponses)
-    answer, oùilenest = game.init(["testabab"])    # pour les tests
+    #answer, oùilenest = game.init(["testabab"])    # pour les tests
     print(answer,oùilenest)
     #fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     pos_fenetre = fenetre.get_rect()
@@ -139,7 +139,7 @@ def jeu(fenetre) :
 
         fenetre.blit(skin[indskin].img, (1400, 300))
 
-        for i in range(1, len(answer)) :
+        for i in range(1, len(answer)+1) :
             fenetre.blit(devining[i].img, devining[i].wanted_pos)
 
             # exemple pour une seule lettre
@@ -160,7 +160,7 @@ def jeu(fenetre) :
 
             if event.type == KEYDOWN :
                 if event.key == K_ESCAPE :
-                    cont=False
+                    #cont = False
                     return
 
  
@@ -257,13 +257,22 @@ def jeu(fenetre) :
                 if lettre[i].justguessed :
                     lettre[i].justguessed = False
                     justesse, pénalité, oùilenest, essayés = game.deviner(answer, oùilenest, essayés, i.lower())
+                    if not "_" in oùilenest :
+                        win()
+                        return
                     if pénalité :
                         if indskin < len(skin):
                             indskin+= 1
+                        else :
+                            loose()
+                            return
+                    elif not "_" in oùilenest :
+                        win()
+                        return
                     if not justesse :
                         pass
                     
-                    for i in range(1, len(answer)) :
+                    for i in range(1, len(answer)+1) :
                         devining[i].write(oùilenest[i-1])
 
 
@@ -275,16 +284,15 @@ def settings(fenetre) :
     fond = pygame.image.load("CopperCarotte/dossier top secret/jeu pygame/menu/fond d'écran menu.jpg").convert()
     fond = pygame.transform.scale(fond, pos_fenetre.size)
 
-    #boum = pygame.image.load("neauteubouqueux/PyGame/BOUM.png").convert_alpha()
-    #boum = pygame.transform.scale(boum, (1000, 1000))
     fenetre.blit(fond, (0, 0))
-    #fenetre.blit(boum, (250, 0))
+    
     pygame.display.flip()
+
     while cont:    
         
-
+        fenetre.blit(fond, (0, 0))
+        pygame.display.flip()
         
-
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -306,22 +314,23 @@ menu()
 
 
 
-def justpathing(image) :
-    absolutepath = os.path.abspath(__file__)
-    fileDirectory = os.path.dirname(absolutepath)
-    fileDirectory = os.path.dirname(fileDirectory)
-    if image == "fond" :
-        newPath = os.path.join(fileDirectory, "fond d'écran menu.png")
-    elif image == "Jouer" :
-        newPath = os.path.join(fileDirectory, "Bouton Jouer.png")
+# def justpathing(image) :
+#     absolutepath = os.path.abspath(__file__)
+#     fileDirectory = os.path.dirname(absolutepath)
+#     fileDirectory = os.path.dirname(fileDirectory)
+#     if image == "fond" :
+#         newPath = os.path.join(fileDirectory, "fond d'écran menu.png")
+#     elif image == "Jouer" :
+#         newPath = os.path.join(fileDirectory, "Bouton Jouer.png")
 
-    return newPath
-
-
+#     return newPath
 
 
+def loose() :
+    print("loss")
 
-
+def win() :
+    print("win")
 
 
 
