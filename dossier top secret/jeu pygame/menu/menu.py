@@ -17,7 +17,7 @@ import skinpendu
 import devinage
 
 
-hard = False
+hard = True
 bordel = aleajactaest.choice("0100")
 nb_essais = 20
 
@@ -28,7 +28,7 @@ def menu() :
     '''
     Créé le menu avec tous les bouttons
     '''
-
+    global script_path
 
     fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     pos_fenetre = fenetre.get_rect()
@@ -89,9 +89,10 @@ def jeu(fenetre) :
     cont = True
     global hard
     global nb_essais
+    global script_path
     essayés = []
     if hard :
-        f = open(str(script_path.parent.parent.parent)+"/liste_de_mots_français_frgut.txt")
+        f = open(str(script_path.parent.parent.parent)+"/liste_de_mots_francais_frgut.txt")
     else :
         f = open(str(script_path.parent.parent.parent)+"/listemotscourants.txt")
     réponses = f.readlines()
@@ -264,7 +265,7 @@ def jeu(fenetre) :
                         if indskin < len(skin):
                             indskin+= 1
                         else :
-                            loose()
+                            loose(answer, oùilenest)
                             return
                     elif not "_" in oùilenest :
                         win()
@@ -278,19 +279,29 @@ def jeu(fenetre) :
 
 def settings(fenetre) :
     cont = True
-
+    global script_path
     #fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     pos_fenetre = fenetre.get_rect()
     fond = pygame.image.load("CopperCarotte/dossier top secret/jeu pygame/menu/fond d'écran menu.jpg").convert()
     fond = pygame.transform.scale(fond, pos_fenetre.size)
 
+    hard = pygame.image.load("CopperCarotte/dossier top secret/jeu pygame/menu/fond d'écran menu.jpg").convert()
+    hard = pygame.transform.scale(fond, (500, 232))
+
+    essai5 = pygame.image.load("CopperCarotte/dossier top secret/jeu pygame/menu/fond d'écran menu.jpg").convert()
+    essai5 = pygame.transform.scale(fond, (500, 232))
+
     fenetre.blit(fond, (0, 0))
-    
+    fenetre.blit(hard, (1000, 600))
+    fenetre.blit(essai5, (1700, 600))
+
     pygame.display.flip()
 
     while cont:    
         
         fenetre.blit(fond, (0, 0))
+        fenetre.blit(hard, (500, 400))
+        fenetre.blit(essai5, (1700, 600))
         pygame.display.flip()
         
 
@@ -302,6 +313,17 @@ def settings(fenetre) :
                 if event.key == K_ESCAPE :
                     cont=False
                     return   
+
+
+
+def loose() :
+    print("loss")
+
+def win() :
+    print("win")
+
+
+
 
 
 
@@ -326,11 +348,7 @@ menu()
 #     return newPath
 
 
-def loose() :
-    print("loss")
 
-def win() :
-    print("win")
 
 
 
