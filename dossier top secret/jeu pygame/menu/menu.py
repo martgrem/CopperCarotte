@@ -95,6 +95,7 @@ def jeu(fenetre) :
     global script_path
     essayés = []
     countdown = -1
+    ended = False
 
     if hard :
         f = open(str(script_path.parent.parent.parent)+"/liste_de_mots_francais_frgut.txt")
@@ -163,10 +164,10 @@ def jeu(fenetre) :
             countdown -= 1
         elif countdown == 0 :
             if indskin == len(skin) :
-                loose(fenetre, answer, oùilenest)
+                loose(fenetre, answer, finalguess, finaltries)
                 return
             elif not "_" in oùilenest :
-                win(fenetre, answer, oùilenest, nbessai)
+                win(fenetre, answer, finalguess, finaltries)
                 return
 
         for event in pygame.event.get():
@@ -274,13 +275,19 @@ def jeu(fenetre) :
                     lettre[i].justguessed = False
                     justesse, pénalité, oùilenest, essayés = game.deviner(answer, oùilenest, essayés, i.lower())
                     if pénalité :
-                        if indskin < len(skin):
+                        if indskin < len(skin) :
                             indskin+= 1
                             nbessai += 1
-                        else :
-                            countdown = 350      # attends un peu avant les résultats
-                    elif not "_" in oùilenest :
-                        countdown = 350     # attends un peu avant les résultats
+                        elif not ended :
+                            countdown = 250      # attends un peu avant les résultats
+                            finalguess = oùilenest
+                            finaltries = nbessai
+                            ended = True
+                    elif not "_" in oùilenest  and not ended :
+                        countdown = 250     # attends un peu avant les résultats
+                        finalguess = oùilenest
+                        finaltries = nbessai
+                        ended = True
                     if not justesse :
                         pass
                     
@@ -327,10 +334,21 @@ def settings(fenetre) :
 
 
 
-def loose(fenetre, answer, oùilenest) :
+def loose(fenetre, answer, oùilenest, nbessai) :
     #print("loss")
     cont = True
     global script_path
+
+    scorr =leaderboard.score(oùilenest, nbessai)
+    #print(scorr)
+    scorr =str(scorr)[::-1]
+    #print(scorr)
+    uscore ={}
+    for j in range(3) :
+        try :
+            uscore[j+1] = score.score(j+1, scorr[j])
+        except :
+            uscore[j+1] = score.score(j+1, "")
 
     pos_fenetre = fenetre.get_rect()
     fond = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
@@ -341,6 +359,8 @@ def loose(fenetre, answer, oùilenest) :
     while cont:
 
         fenetre.blit(fond, (0, 0))
+        for i in range(3) :
+            fenetre.blit(uscore[i+1].img, uscore[i+1].wanted_pos)
 
         pygame.display.flip()
 
@@ -364,7 +384,7 @@ def win(fenetre, answer, oùilenest, nbessai) :
     scorr =str(scorr)[::-1]
     #print(scorr)
     uscore ={}
-    for j in range(4) :
+    for j in range(3) :
         try :
             uscore[j+1] = score.score(j+1, scorr[j])
         except :
@@ -379,7 +399,7 @@ def win(fenetre, answer, oùilenest, nbessai) :
     while cont:
 
         fenetre.blit(fond, (0, 0))
-        for i in range(4) :
+        for i in range(3) :
             fenetre.blit(uscore[i+1].img, uscore[i+1].wanted_pos)
 
         pygame.display.flip()
