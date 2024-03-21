@@ -17,7 +17,7 @@ fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
 
 def skinchoice(n) :
-    return range(1, 21)
+    return range(0, 21)
     y =[]
     for k in [2 ,4, 5, 10] :
         if n%k == 0 :
@@ -32,7 +32,7 @@ class skins :
     def __init__(self, nb) :
 
         self.img = pygame.image.load(str(path.parent) + "/lettres/Pendu sprite/lettre" + str(nb) + ".png").convert()
-
+        self.img = pygame.transform.scale(self.img, (162,170))
         self.nb = nb+1
 
 

@@ -124,7 +124,7 @@ def jeu(fenetre) :
     
     skin = {}
     for j, i in enumerate(skinpendu.skinchoice(nb_essais)) :
-        skin[j+1] = skinpendu.skins(i)
+        skin[j] = skinpendu.skins(i)
     indskin = 1
 
     devining = {}
