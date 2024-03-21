@@ -15,10 +15,12 @@ import lettres
 import game
 import skinpendu
 import devinage
+import leaderboard
+import score
 
 
-hard = True
-bordel = aleajactaest.choice("0100")
+hard = False
+bordel = aleajactaest.choice([True, False, False])
 nb_essais = 20
 
 
@@ -89,8 +91,11 @@ def jeu(fenetre) :
     cont = True
     global hard
     global nb_essais
+    nbessai = 0
     global script_path
     essayés = []
+    countdown = -1
+
     if hard :
         f = open(str(script_path.parent.parent.parent)+"/liste_de_mots_francais_frgut.txt")
     else :
@@ -99,10 +104,10 @@ def jeu(fenetre) :
     f.close()
     answer, oùilenest = game.init(réponses)
     #answer, oùilenest = game.init(["testabab"])    # pour les tests
-    print(answer,oùilenest)
+    #print(answer,oùilenest)
     #fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     pos_fenetre = fenetre.get_rect()
-    print(pos_fenetre.size)
+    #print(pos_fenetre.size)
     fond = pygame.image.load(str(script_path.parent) + "/fond d'écran menu.jpg").convert()
     fond = pygame.transform.scale(fond, pos_fenetre.size)
         
@@ -153,6 +158,16 @@ def jeu(fenetre) :
         
 
         pygame.display.flip()
+
+        if countdown > 0 :
+            countdown -= 1
+        elif countdown == 0 :
+            if indskin == len(skin) :
+                loose(fenetre, answer, oùilenest)
+                return
+            elif not "_" in oùilenest :
+                win(fenetre, answer, oùilenest, nbessai)
+                return
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -258,18 +273,14 @@ def jeu(fenetre) :
                 if lettre[i].justguessed :
                     lettre[i].justguessed = False
                     justesse, pénalité, oùilenest, essayés = game.deviner(answer, oùilenest, essayés, i.lower())
-                    if not "_" in oùilenest :
-                        win()
-                        return
                     if pénalité :
                         if indskin < len(skin):
                             indskin+= 1
+                            nbessai += 1
                         else :
-                            loose(answer, oùilenest)
-                            return
+                            countdown = 350      # attends un peu avant les résultats
                     elif not "_" in oùilenest :
-                        win()
-                        return
+                        countdown = 350     # attends un peu avant les résultats
                     if not justesse :
                         pass
                     
@@ -282,13 +293,13 @@ def settings(fenetre) :
     global script_path
     #fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     pos_fenetre = fenetre.get_rect()
-    fond = pygame.image.load("CopperCarotte/dossier top secret/jeu pygame/menu/fond d'écran menu.jpg").convert()
+    fond = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
     fond = pygame.transform.scale(fond, pos_fenetre.size)
 
-    hard = pygame.image.load("CopperCarotte/dossier top secret/jeu pygame/menu/fond d'écran menu.jpg").convert()
+    hard = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
     hard = pygame.transform.scale(fond, (500, 232))
 
-    essai5 = pygame.image.load("CopperCarotte/dossier top secret/jeu pygame/menu/fond d'écran menu.jpg").convert()
+    essai5 = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
     essai5 = pygame.transform.scale(fond, (500, 232))
 
     fenetre.blit(fond, (0, 0))
@@ -316,12 +327,71 @@ def settings(fenetre) :
 
 
 
-def loose() :
-    print("loss")
+def loose(fenetre, answer, oùilenest) :
+    #print("loss")
+    cont = True
+    global script_path
 
-def win() :
-    print("win")
+    pos_fenetre = fenetre.get_rect()
+    fond = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
+    fond = pygame.transform.scale(fond, pos_fenetre.size)
 
+    pygame.display.flip()
+
+    while cont:
+
+        fenetre.blit(fond, (0, 0))
+
+        pygame.display.flip()
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                cont=False
+                pygame.display.quit()
+            if event.type == KEYDOWN :
+                if event.key == K_ESCAPE :
+                    cont=False
+                    return   
+    
+
+def win(fenetre, answer, oùilenest, nbessai) :
+    #print("win")
+    cont = True
+    global script_path
+
+    scorr =leaderboard.score(oùilenest, nbessai)
+    #print(scorr)
+    scorr =str(scorr)[::-1]
+    #print(scorr)
+    uscore ={}
+    for j in range(4) :
+        try :
+            uscore[j+1] = score.score(j+1, scorr[j])
+        except :
+            uscore[j+1] = score.score(j+1, "")
+
+    pos_fenetre = fenetre.get_rect()
+    fond = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
+    fond = pygame.transform.scale(fond, pos_fenetre.size)
+
+    pygame.display.flip()
+
+    while cont:
+
+        fenetre.blit(fond, (0, 0))
+        for i in range(4) :
+            fenetre.blit(uscore[i+1].img, uscore[i+1].wanted_pos)
+
+        pygame.display.flip()
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                cont=False
+                pygame.display.quit()
+            if event.type == KEYDOWN :
+                if event.key == K_ESCAPE :
+                    cont=False
+                    return   
 
 
 
@@ -336,19 +406,8 @@ menu()
 
 
 
-# def justpathing(image) :
-#     absolutepath = os.path.abspath(__file__)
-#     fileDirectory = os.path.dirname(absolutepath)
-#     fileDirectory = os.path.dirname(fileDirectory)
-#     if image == "fond" :
-#         newPath = os.path.join(fileDirectory, "fond d'écran menu.png")
-#     elif image == "Jouer" :
-#         newPath = os.path.join(fileDirectory, "Bouton Jouer.png")
 
-#     return newPath
-
-
-
+ 
 
 
 
