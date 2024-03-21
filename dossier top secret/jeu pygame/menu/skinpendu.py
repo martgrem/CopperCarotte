@@ -16,13 +16,17 @@ fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
 
 
-def skinchoice(n) :
-    return range(0, 21)
-    y =[]
-    for k in [2 ,4, 5, 10] :
-        if n%k == 0 :
-            for i in range(k) :
-                pass
+def skinchoice(nb_essai) :
+    
+    if nb_essai== 20 :
+        return range(0, 21)
+    elif nb_essai == 15 :
+        return (0,2,3,5,7,8,9,11,13,14,15,16,17,18,19,20)
+    elif nb_essai == 10 :
+        return (0,3,5,7,9,11,13,15,18,19,20)
+    elif nb_essai ==5 :
+        return (0,7,11,15,19,20)
+
             
 
 
