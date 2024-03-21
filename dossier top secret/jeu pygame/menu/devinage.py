@@ -43,7 +43,7 @@ def position(n : int, lx, ly) :
     n = nombre de la lettre
     lx, ly = dimensions de la lettre
     '''
-    ox, oy = 1300, 700
+    ox, oy = 1400, 900
     xspace = lx/3
     yspace = ly/3
 
@@ -66,7 +66,7 @@ class deviningletters :
     def __init__(self, nb) :
         self.nom = "lettre" +str(nb)
         self.nb = nb
-        self.img = pygame.image.load(str(path.parent) + "/lettres/lettrevide/" + "lettrevide" + ".png").convert()
+        self.img = pygame.image.load(str(path.parent) + "/lettres/lettrevide/" + "lettre_" + ".png").convert()
         self.img = pygame.transform.scale(self.img, (75, 75))
         self.status = ""
         self.ln = 75

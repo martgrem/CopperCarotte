@@ -32,7 +32,7 @@ class skins :
     def __init__(self, nb) :
 
         self.img = pygame.image.load(str(path.parent) + "/lettres/Pendu sprite/lettre" + str(nb) + ".png").convert()
-        self.img = pygame.transform.scale(self.img, (162,170))
+        self.img = pygame.transform.scale(self.img, (162*4,170*4))
         self.nb = nb+1
 
 

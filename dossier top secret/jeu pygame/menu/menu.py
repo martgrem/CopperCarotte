@@ -19,7 +19,7 @@ import leaderboard
 import score
 
 
-hard = False
+hard = True
 bordel = aleajactaest.choice([True, False, False])
 nb_essais = 20
 
@@ -125,7 +125,7 @@ def jeu(fenetre) :
     skin = {}
     for j, i in enumerate(skinpendu.skinchoice(nb_essais)) :
         skin[j] = skinpendu.skins(i)
-    indskin = 1
+    indskin = 0
 
     devining = {}
     for i in range(1, 21) :
@@ -162,8 +162,8 @@ def jeu(fenetre) :
 
         if countdown > 0 :
             countdown -= 1
-        elif countdown == 0 :
-            if indskin == len(skin) :
+        if countdown == 0 :
+            if indskin == 20 :
                 loose(fenetre, answer, finalguess, finaltries)
                 return
             elif not "_" in oùilenest :
@@ -271,19 +271,22 @@ def jeu(fenetre) :
                             lettre[i].justguessed =True
 
             for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-" :
-                if lettre[i].justguessed :
+                if lettre[i].justguessed and not ended :
                     lettre[i].justguessed = False
                     justesse, pénalité, oùilenest, essayés = game.deviner(answer, oùilenest, essayés, i.lower())
                     if pénalité :
-                        if indskin < len(skin) :
+                        print(indskin)
+                        if indskin < 19:
                             indskin+= 1
                             nbessai += 1
-                        elif not ended :
+                        else :
+                            indskin+= 1
+                            nbessai += 1
                             countdown = 250      # attends un peu avant les résultats
                             finalguess = oùilenest
                             finaltries = nbessai
                             ended = True
-                    elif not "_" in oùilenest  and not ended :
+                    elif not "_" in oùilenest:
                         countdown = 250     # attends un peu avant les résultats
                         finalguess = oùilenest
                         finaltries = nbessai
@@ -339,7 +342,7 @@ def loose(fenetre, answer, oùilenest, nbessai) :
     cont = True
     global script_path
 
-    scorr =leaderboard.score(oùilenest, nbessai)
+    scorr = score.scorr(oùilenest, nbessai)
     #print(scorr)
     scorr =str(scorr)[::-1]
     #print(scorr)
@@ -379,7 +382,7 @@ def win(fenetre, answer, oùilenest, nbessai) :
     cont = True
     global script_path
 
-    scorr =leaderboard.score(oùilenest, nbessai)
+    scorr = score.scorr(oùilenest, nbessai)
     #print(scorr)
     scorr =str(scorr)[::-1]
     #print(scorr)

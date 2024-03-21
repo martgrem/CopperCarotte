@@ -13,7 +13,42 @@ path = Path(__file__).resolve()
 
 fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
+scrabble = [" ", "aeilnorstu", "dgmé", "bccpè", "fhv","","àê-","âîôû","jq", "", "kwxyzç", "", "", "", "", "ïöüÿùòä"]
+lettres = set("qwertzuiopasdfghjklyxcvbnméèêëàäâîìïôöòûüùÿç-")
 
+
+
+
+
+def diffletters(x : (str or list)) :
+    '''
+    Compter le nombre de lettre différent
+    '''
+    y = []
+    for i in x :
+        if i in lettres and i not in y :
+            y.append(i)
+    return y
+
+
+
+    
+
+def scorr(mot, nbessais) :   
+    '''
+    Cette fonction fait gagner 2x plus de points, si le joueur a découvert le mot en entier
+    '''
+    score = 0
+    x = diffletters(mot)
+    for i in x :
+        for indj, j in enumerate(scrabble) :
+            if i in j :
+                score += indj
+                break
+    score -= nbessais
+    if "_" not in mot :
+        score *= 2
+    return score
 
 
 class score :
