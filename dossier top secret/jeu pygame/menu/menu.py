@@ -144,7 +144,7 @@ def jeu(fenetre) :
             elif lettre[i].guess : #si la lettre n'est pas encore essayée        (à faire pour toutes les lettres)
                 fenetre.blit(lettre[i].usedimg, lettre[i].wanted_pos)
 
-        fenetre.blit(skin[indskin].img, (1400, 300))
+        fenetre.blit(skin[indskin].img, (1400, 100))
 
         for i in range(1, len(answer)+1) :
             fenetre.blit(devining[i].img, devining[i].wanted_pos)
