@@ -17,6 +17,7 @@ import devinage
 #import leaderboard
 import score
 import boutonssettings
+import Compétition
 
 
 hard = False
@@ -99,7 +100,7 @@ def menu() :
                     elif pos_setbtn[0] <= pos[0] <= pos_setbtn[0] + pos_setbtn[2] and pos_setbtn[1] <= pos[1] <= pos_setbtn[1] + pos_setbtn[3] :
                         settings(fenetre)
                     elif pos_compbtn[0] <= pos[0] <= pos_compbtn[0] + pos_compbtn[2] and pos_compbtn[1] <= pos[1] <= pos_compbtn[1] + pos_compbtn[3] :
-                        compétition(fenetre)
+                        Compétition.compétition(fenetre)
                     elif pos_hsbtn[0] <= pos[0] <= pos_hsbtn[0] + pos_hsbtn[2] and pos_hsbtn[1] <= pos[1] <= pos_hsbtn[1] + pos_hsbtn[3] :
                         leaderboard(fenetre)
 
