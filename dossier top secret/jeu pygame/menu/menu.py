@@ -303,12 +303,12 @@ def jeu(fenetre) :
                         else :
                             indskin+= 1
                             nbessai += 1
-                            countdown = 250      # attends un peu avant les résultats
+                            countdown = 300      # attends un peu avant les résultats
                             finalguess = oùilenest
                             finaltries = nbessai
                             ended = True
                     elif not "_" in oùilenest:
-                        countdown = 250     # attends un peu avant les résultats
+                        countdown = 300    # attends un peu avant les résultats
                         finalguess = oùilenest
                         finaltries = nbessai
                         ended = True

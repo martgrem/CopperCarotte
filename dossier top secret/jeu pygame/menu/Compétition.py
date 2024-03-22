@@ -63,7 +63,7 @@ def jeu(fenetre) :
     #print(lettre["-"])
     
     skin = {}
-    for j, i in enumerate(skinpendu.skinchoice(nb_essais)) :
+    for j, i in enumerate(skinpendu.skinchoice(10)) :
         skin[j] = skinpendu.skins(i)
     indskin = 0
 
@@ -310,6 +310,7 @@ def pseudo(fenetre) :
     cont = True
     global script_path
     cd = 0
+    endcd = -1
     name = ""
 
     lettre = {}
@@ -348,7 +349,12 @@ def pseudo(fenetre) :
         pygame.display.flip()
         
         if len(name) == 3 :
-            return name
+            if cd == 0 :
+                return name
+            elif cd > 0 :
+                cd -= 1
+            else :
+                cd = 300
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -440,15 +446,15 @@ def pseudo(fenetre) :
                         cd = 100
 
 
-                    if event.type == MOUSEBUTTONDOWN :
-                        if pygame.mouse.get_pressed()[0] :
-                            mspos = pygame.mouse.get_pos()
+            if event.type == MOUSEBUTTONDOWN and cd == 0:
+                if pygame.mouse.get_pressed()[0] :
+                    mspos = pygame.mouse.get_pos()
 
 
-                            for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-" :
-                                if lettre[i].wanted_pos[0] <= mspos[0] <= lettre[i].wanted_pos[0] + lettre[i].ln and lettre[i].wanted_pos[1] <= mspos[1] <= lettre[i].wanted_pos[1] + lettre[i].ln :
-                                    name += str(i)
-                                    cd = 100
+                    for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-" :
+                        if lettre[i].wanted_pos[0] <= mspos[0] <= lettre[i].wanted_pos[0] + lettre[i].ln and lettre[i].wanted_pos[1] <= mspos[1] <= lettre[i].wanted_pos[1] + lettre[i].ln :
+                            name += str(i)
+                            cd = 100
 
 
 def compétition(fenetre) :
