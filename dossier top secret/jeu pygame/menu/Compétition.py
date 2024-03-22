@@ -337,7 +337,7 @@ def pseudo(fenetre) :
         if cd != 0 :
             cd -= 1
         fenetre.blit(fond, (0, 0))
-        fenetre.blit(fond, (800, 500))
+        fenetre.blit(demande, (1500, 350))
 
         for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-" :
             fenetre.blit(lettre[i].img, lettre[i].wanted_pos)
