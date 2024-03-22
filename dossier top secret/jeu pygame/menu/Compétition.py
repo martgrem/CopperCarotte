@@ -306,7 +306,110 @@ def tronul(fenetre) :
                     return   
 
 
+def pseudo(fenetre) :
+    cont = True
+    global script_path
+    cd = 0
+    name = ""
 
+    lettre = {}
+    for j, i in enumerate(aleajactaest.sample("ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-", len("ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-"))) :
+        lettre[i] = lettres.letters(i, j)
+
+    pos_fenetre = fenetre.get_rect()
+    fond = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
+    fond = pygame.transform.scale(fond, pos_fenetre.size)
+
+    fenetre.blit(fond, (0, 0))
+
+    pygame.display.flip()
+
+    while cont:    
+        
+        fenetre.blit(fond, (0, 0))
+
+        for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-" :
+            fenetre.blit(lettre[i].img, lettre[i].wanted_pos)
+
+        pygame.display.flip()
+        
+        if len(name) == 3 :
+            return name
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                cont=False
+                pygame.display.quit()
+            if event.type == KEYDOWN :
+                if event.key == K_ESCAPE :
+                    cont=False
+                    return
+                if cd != 0 :
+                    cd -= 1
+                else :
+                    if event.key == K_a :
+                        name += "A"
+                    elif event.key == K_b :
+                        name += "B"
+                    elif event.key == K_c :
+                        name += "C"
+                    elif event.key == K_d :
+                        name += "D"
+                    elif event.key == K_e :
+                        name += "E"
+                    elif event.key == K_f :
+                        name += "F"
+                    elif event.key == K_g :
+                        name += "G"
+                    elif event.key == K_h :
+                        name += "H"
+                    elif event.key == K_i :
+                        name += "I"
+                    elif event.key == K_j :
+                        name += "J"
+                    elif event.key == K_k :
+                        name += "K"
+                    elif event.key == K_l :
+                        name += "L"
+                    elif event.key == K_m :
+                        name += "M"
+                    elif event.key == K_n :
+                        name += "N"
+                    elif event.key == K_o :
+                        name += "O"
+                    elif event.key == K_p :
+                        name += "P"
+                    elif event.key == K_q :
+                        name += "Q"
+                    elif event.key == K_r :
+                        name += "X"
+                    elif event.key == K_s :
+                        name += "R"
+                    elif event.key == K_t :
+                        name += "S"
+                    elif event.key == K_u :
+                        name += "T"
+                    elif event.key == K_v :
+                        name += "U"
+                    elif event.key == K_w :
+                        name += "V"
+                    elif event.key == K_x :
+                        name += "W"
+                    elif event.key == K_y :
+                        name += "Y"
+                    elif event.key == K_z :
+                        name += "Z"
+
+
+                    if event.type == MOUSEBUTTONDOWN :
+                        if pygame.mouse.get_pressed()[0] :
+                            mspos = pygame.mouse.get_pos()
+
+
+                            for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-" :
+                                if lettre[i].wanted_pos[0] <= mspos[0] <= lettre[i].wanted_pos[0] + lettre[i].ln and lettre[i].wanted_pos[1] <= mspos[1] <= lettre[i].wanted_pos[1] + lettre[i].ln and not lettre[i].guess:
+                                    name += str(i)
+                                    cd = 100
 
 
 def compétition(fenetre) :
@@ -320,6 +423,12 @@ def compétition(fenetre) :
         tronul(fenetre)
     else :
         win(fenetre, scorr)
+        f = open(str(script_path.parent.parent) + "leaderboard.txt")
+        lines = f.readlines()
+        f.close()
+        a, b = lines[2].split(", ")
+        if a == None or b < scorr :
+            name = pseudo(fenetre)
 
 
 
@@ -327,7 +436,7 @@ def compétition(fenetre) :
     
         
      
-def leaderboard(fenetre) :
+def fenetrevide(fenetre) :
     cont = True
     global script_path
     #fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
