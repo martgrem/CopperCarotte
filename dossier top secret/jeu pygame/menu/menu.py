@@ -417,6 +417,8 @@ def settings(fenetre) :
     global script_path
     global hard
     global nb_essais
+    tries = int(nb_essais/5 -1)
+    essais_possibles = ["05", "10", "15", "20"]
     #fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     pos_fenetre = fenetre.get_rect()
     fond = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
@@ -449,6 +451,9 @@ def settings(fenetre) :
     for i in ["05", "10", "15", "20"] :
         nbessais[i] = boutonssettings.essaisnb(i)
 
+    pos2_lbtn = (nbessais[essais_possibles[tries]].wanted_pos[0][0] -5, nbessais[essais_possibles[tries]].wanted_pos[0][1])
+    pos2_rbtn = (pos_essaisbtn[0] + 200 + 116*5 + 50, pos_essaisbtn[1])
+
     if hard :
         difficulté = noteasy
     else :
@@ -470,11 +475,11 @@ def settings(fenetre) :
         fenetre.blit(difficulté, (pos_diff))
         fenetre.blit(lbtn, (pos_lbtn[0], pos_lbtn[1]))
         fenetre.blit(rbtn, (pos_rbtn[0], pos_rbtn[1]))
-        fenetre.blit(essaisbtn, pos_essaisbtn)
-        for i in nbessais.keys() :
-             fenetre.blit(nbessais[i].img1, nbessais[i].wanted_pos[0])
-             fenetre.blit(nbessais[i].img2, nbessais[i].wanted_pos[1])
-
+        fenetre.blit(essaisbtn, (pos_essaisbtn[0] + 200, pos_essaisbtn[1]))
+        fenetre.blit(nbessais[essais_possibles[tries]].img1, (nbessais[essais_possibles[tries]].wanted_pos[0][0] + 200, nbessais[essais_possibles[tries]].wanted_pos[0][1]))
+        fenetre.blit(nbessais[essais_possibles[tries]].img2, (nbessais[essais_possibles[tries]].wanted_pos[1][1] + 200, nbessais[essais_possibles[tries]].wanted_pos[1][1]))
+        fenetre.blit(lbtn, (nbessais[essais_possibles[tries]].wanted_pos[0][0] -5, nbessais[essais_possibles[tries]].wanted_pos[0][1]))
+        fenetre.blit(rbtn, (pos_essaisbtn[0] + 200 + 116*5 + 50, pos_essaisbtn[1]))
         pygame.display.flip()
         
 
@@ -496,6 +501,14 @@ def settings(fenetre) :
                     elif pos_rbtn[0] <= pos[0] <= pos_rbtn[0] + pos_rbtn[2] and pos_rbtn[1] <= pos[1] <= pos_rbtn[1] + pos_rbtn[3] :
                         hard = True
                         difficulté = noteasy
+                    elif pos2_lbtn[0] <= pos[0] <= pos2_lbtn[0] + pos_lbtn[2] and pos2_lbtn[1] <= pos[1] <= pos2_lbtn[1] + pos_lbtn[3] :
+                        if tries > 0 :
+                            tries -= 1
+                            nb_essais = 5*(tries+1)
+                    elif pos2_rbtn[0] <= pos[0] <= pos2_rbtn[0] + pos_rbtn[2] and pos2_rbtn[1] <= pos[1] <= pos2_rbtn[1] + pos_rbtn[3] :
+                        if tries < 3 :
+                            tries += 1
+                            nb_essais = 5*(tries+1)
 
 
 
