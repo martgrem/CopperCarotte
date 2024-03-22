@@ -318,7 +318,7 @@ def pseudo(fenetre) :
 
     nom = {}
     for i in range(3) :
-        nom[i] = devinage.deviningletters
+        nom[i+1] = devinage.deviningletters(i+1)
 
     pos_fenetre = fenetre.get_rect()
     fond = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
@@ -332,9 +332,10 @@ def pseudo(fenetre) :
 
     while cont:    
         for j, i in enumerate(name) :
-            nom[j+1] = nom[j+1].write(i)
+            nom[j+1].write(i)
 
-
+        if cd != 0 :
+            cd -= 1
         fenetre.blit(fond, (0, 0))
         fenetre.blit(fond, (800, 500))
 
@@ -357,9 +358,8 @@ def pseudo(fenetre) :
                 # if event.key == K_ESCAPE :
                 #     cont=False
                 #     return
-                if cd != 0 :
-                    cd -= 1
-                else :
+                
+                if cd == 0 :
                     if event.key == K_a :
                         name += "A"
                         cd = 100
@@ -446,7 +446,7 @@ def pseudo(fenetre) :
 
 
                             for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-" :
-                                if lettre[i].wanted_pos[0] <= mspos[0] <= lettre[i].wanted_pos[0] + lettre[i].ln and lettre[i].wanted_pos[1] <= mspos[1] <= lettre[i].wanted_pos[1] + lettre[i].ln and not lettre[i].guess:
+                                if lettre[i].wanted_pos[0] <= mspos[0] <= lettre[i].wanted_pos[0] + lettre[i].ln and lettre[i].wanted_pos[1] <= mspos[1] <= lettre[i].wanted_pos[1] + lettre[i].ln :
                                     name += str(i)
                                     cd = 100
 
@@ -467,17 +467,15 @@ def compétition(fenetre) :
         lines = f.readlines()
         f.close()
         a, b = lines[2].split(", ")
-        print(a)
-        if a == None or int(b.strip()) < scorr :
-            print(a)
+        if a == "None" or int(b.strip()) < scorr :
             name = pseudo(fenetre)
             f = open(str(script_path.parent.parent.parent) + "/leaderboard.txt", "w")
             a, b = lines[0].split(", ")
-            if a == None or int(b.strip()) < scorr :
+            if a == "None" or int(b.strip()) < scorr :
                 f.write(str(name) + ", " + str(scorr) + "\n" + lines[0] + lines[1].strip())
             else :
                 a, b = lines[1].split(", ")
-                if a == None or int(b.strip()) < scorr :
+                if a == "None" or int(b.strip()) < scorr :
                     f.write(lines[0] + str(name) + ", " + str(scorr) + "\n" + lines[1].strip())
                 else :
                     f.write(lines[0] + lines[1] + str(name) + ", " + str(scorr))
