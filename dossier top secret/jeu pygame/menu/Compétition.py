@@ -323,7 +323,8 @@ def pseudo(fenetre) :
     pos_fenetre = fenetre.get_rect()
     fond = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
     fond = pygame.transform.scale(fond, pos_fenetre.size)
-    demande = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
+    demande = pygame.image.load(str(script_path.parent)+"/boutons menu/Bouton Pseudo.png").convert()
+    demande = pygame.transform.scale(demande, (80*5, 17*5))
 
     fenetre.blit(fond, (0, 0))
 
@@ -335,6 +336,7 @@ def pseudo(fenetre) :
 
 
         fenetre.blit(fond, (0, 0))
+        fenetre.blit(fond, (800, 500))
 
         for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-" :
             fenetre.blit(lettre[i].img, lettre[i].wanted_pos)
@@ -352,9 +354,9 @@ def pseudo(fenetre) :
                 cont=False
                 pygame.display.quit()
             if event.type == KEYDOWN :
-                if event.key == K_ESCAPE :
-                    cont=False
-                    return
+                # if event.key == K_ESCAPE :
+                #     cont=False
+                #     return
                 if cd != 0 :
                     cd -= 1
                 else :
@@ -456,16 +458,31 @@ def compétition(fenetre) :
          if c == "closed" :
              return
          scorr += c
-    if scorr < 99 :
+    if scorr < -99 :
         tronul(fenetre)
+        return
     else :
         win(fenetre, scorr)
-        f = open(str(script_path.parent.parent) + "leaderboard.txt")
+        f = open(str(script_path.parent.parent.parent) + "/leaderboard.txt", "r")
         lines = f.readlines()
         f.close()
         a, b = lines[2].split(", ")
-        if a == None or b < scorr :
+        print(a)
+        if a == None or int(b.strip()) < scorr :
+            print(a)
             name = pseudo(fenetre)
+            f = open(str(script_path.parent.parent.parent) + "/leaderboard.txt", "w")
+            a, b = lines[0].split(", ")
+            if a == None or int(b.strip()) < scorr :
+                f.write(str(name) + ", " + str(scorr) + "\n" + lines[0] + lines[1].strip())
+            else :
+                a, b = lines[1].split(", ")
+                if a == None or int(b.strip()) < scorr :
+                    f.write(lines[0] + str(name) + ", " + str(scorr) + "\n" + lines[1].strip())
+                else :
+                    f.write(lines[0] + lines[1] + str(name) + ", " + str(scorr))
+            f.close()
+            return
 
 
 

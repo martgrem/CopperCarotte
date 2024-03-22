@@ -118,9 +118,9 @@ def jeu(fenetre) :
     ended = False
 
     if hard :
-        f = open(str(script_path.parent.parent.parent)+"/liste_de_mots_francais_frgut.txt")
+        f = open(str(script_path.parent.parent.parent)+"/liste_de_mots_francais_frgut.txt", "r")
     else :
-        f = open(str(script_path.parent.parent.parent)+"/listemotscourants.txt")
+        f = open(str(script_path.parent.parent.parent)+"/listemotscourants.txt", "r")
     réponses = f.readlines()
     f.close()
     answer, oùilenest = game.init(réponses)
