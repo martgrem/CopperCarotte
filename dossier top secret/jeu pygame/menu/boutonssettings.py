@@ -21,7 +21,7 @@ class essaisch :
         self.img = pygame.transform.scale(self.img, (31*5, 29*5))
 
         #self.wanted_pos = (2240/2 - 250, 1260/2 - 116)
-        self.wanted_pos = (300, 450 + 100*int(nb))
+        self.wanted_pos = (300, 485)
 
 
 class essaisnb :
@@ -29,7 +29,7 @@ class essaisnb :
     def __init__(self, nb) :
         self.img1 = essaisch(nb[:1]).img
         self.img2 = essaisch(nb[1:]).img
-        self.wanted_pos = (300,20*int(nb)), (300 + 155 + 50, 20*int(nb))
+        self.wanted_pos = (300,485), (300 + 155 + 50, 485)
 
 
 
