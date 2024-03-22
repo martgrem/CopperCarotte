@@ -338,13 +338,13 @@ def pseudo(fenetre) :
         if cd != 0 :
             cd -= 1
         fenetre.blit(fond, (0, 0))
-        fenetre.blit(demande, (1500, 350))
+        fenetre.blit(demande, (1400, 350))
 
         for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-" :
             fenetre.blit(lettre[i].img, lettre[i].wanted_pos)
 
         for i in nom.keys() :
-            fenetre.blit(nom[i].img, (nom[i].wanted_pos[0], nom[i].wanted_pos[1]))
+            fenetre.blit(nom[i].img, (nom[i].wanted_pos[0] - 15, nom[i].wanted_pos[1] - 300))
 
         pygame.display.flip()
         
