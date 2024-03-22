@@ -277,7 +277,28 @@ def win(fenetre, scorr) :
 
 
 
+def tronul(fenetre) :
 
+    pos_fenetre = fenetre.get_rect()
+    fond = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
+    fond = pygame.transform.scale(fond, pos_fenetre.size)
+    tronul = pygame.image.load(str(script_path.parent)+"/boutons menu/Bouton Points.png").convert()
+    tronul = pygame.transform.scale(tronul, ())
+
+    pygame.display.flip()
+
+    while cont:
+
+        pygame.display.flip()
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                cont=False
+                pygame.display.quit()
+            if event.type == KEYDOWN :
+                if event.key == K_ESCAPE :
+                    cont=False
+                    return   
 
 
 
@@ -285,41 +306,16 @@ def win(fenetre, scorr) :
 
 def compétition(fenetre) :
     scorr = 0
-    for _ in range(1) :
+    for _ in range(10) :
          c = jeu(fenetre)
          if c == "closed" :
              return
          scorr += c
-    win(fenetre, scorr)
-    print(scorr)
-    # cont = True
-    # global script_path
-    # #fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-    # pos_fenetre = fenetre.get_rect()
-    # fond = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
-    # fond = pygame.transform.scale(fond, pos_fenetre.size)
+    if scorr < -99 :
+        tronul(fenetre)
+    else :
+        win(fenetre, scorr)
 
-    # fenetre.blit(fond, (0, 0))
-
-    # pygame.display.flip()
-
-    # while cont:    
-        
-    #     fenetre.blit(fond, (0, 0))
-    #     pygame.display.flip()
-        
-
-    #     for event in pygame.event.get():
-    #         if event.type == QUIT:
-    #             cont=False
-    #             pygame.display.quit()
-    #         if event.type == KEYDOWN :
-    #             if event.key == K_ESCAPE :
-    #                 cont=False
-    #                 return 
-                
-    # for _ in range (10) :
-    #     jeu()
 
 
 
