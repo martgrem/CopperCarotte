@@ -279,19 +279,20 @@ def win(fenetre, scorr) :
 
 def tronul(fenetre) :
     cont = True
-    
+
     pos_fenetre = fenetre.get_rect()
     fond = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
     fond = pygame.transform.scale(fond, pos_fenetre.size)
     tronul = pygame.image.load(str(script_path.parent)+"/boutons menu/Bouton erreur.png").convert()
     tronul = pygame.transform.scale(tronul, (926, 367))
+    pos_tronul = tronul.get_rect()
 
     pygame.display.flip()
 
     while cont:
 
         fenetre.blit(fond, (0, 0))
-        fenetre.blit(tronul, (250, 400))
+        fenetre.blit(tronul, (pos_fenetre.size[0]/2 - pos_tronul.size[0]/2, pos_fenetre.size[1]/2 - pos_tronul.size[1]/2))
 
         pygame.display.flip()
 
