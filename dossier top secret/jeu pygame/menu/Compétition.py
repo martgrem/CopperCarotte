@@ -316,20 +316,31 @@ def pseudo(fenetre) :
     for j, i in enumerate(aleajactaest.sample("ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-", len("ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-"))) :
         lettre[i] = lettres.letters(i, j)
 
+    nom = {}
+    for i in range(3) :
+        nom[i] = devinage.deviningletters
+
     pos_fenetre = fenetre.get_rect()
     fond = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
     fond = pygame.transform.scale(fond, pos_fenetre.size)
+    demande = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
 
     fenetre.blit(fond, (0, 0))
 
     pygame.display.flip()
 
     while cont:    
-        
+        for j, i in enumerate(name) :
+            nom[j+1] = nom[j+1].write(i)
+
+
         fenetre.blit(fond, (0, 0))
 
         for i in "ABCDEFGHIJKLMNOPQRSTUVWXYZéèêëàäâîìïôöòûüùÿç-" :
             fenetre.blit(lettre[i].img, lettre[i].wanted_pos)
+
+        for i in nom.keys() :
+            fenetre.blit(nom[i].img, (nom[i].wanted_pos[0], nom[i].wanted_pos[1]))
 
         pygame.display.flip()
         
@@ -349,56 +360,82 @@ def pseudo(fenetre) :
                 else :
                     if event.key == K_a :
                         name += "A"
+                        cd = 100
                     elif event.key == K_b :
                         name += "B"
+                        cd = 100
                     elif event.key == K_c :
                         name += "C"
+                        cd = 100
                     elif event.key == K_d :
                         name += "D"
+                        cd = 100
                     elif event.key == K_e :
                         name += "E"
+                        cd = 100
                     elif event.key == K_f :
                         name += "F"
+                        cd = 100
                     elif event.key == K_g :
                         name += "G"
+                        cd = 100
                     elif event.key == K_h :
                         name += "H"
+                        cd = 100
                     elif event.key == K_i :
                         name += "I"
+                        cd = 100
                     elif event.key == K_j :
                         name += "J"
+                        cd = 100
                     elif event.key == K_k :
                         name += "K"
+                        cd = 100
                     elif event.key == K_l :
                         name += "L"
+                        cd = 100
                     elif event.key == K_m :
                         name += "M"
+                        cd = 100
                     elif event.key == K_n :
                         name += "N"
+                        cd = 100
                     elif event.key == K_o :
                         name += "O"
+                        cd = 100
                     elif event.key == K_p :
                         name += "P"
+                        cd = 100
                     elif event.key == K_q :
                         name += "Q"
+                        cd = 100
                     elif event.key == K_r :
                         name += "X"
+                        cd = 100
                     elif event.key == K_s :
                         name += "R"
+                        cd = 100
                     elif event.key == K_t :
                         name += "S"
+                        cd = 100
                     elif event.key == K_u :
                         name += "T"
+                        cd = 100
                     elif event.key == K_v :
                         name += "U"
+                        cd = 100
                     elif event.key == K_w :
                         name += "V"
+                        cd = 100
                     elif event.key == K_x :
                         name += "W"
+                        cd = 100
                     elif event.key == K_y :
                         name += "Y"
+                        cd = 100
                     elif event.key == K_z :
                         name += "Z"
+                        cd = 100
 
 
                     if event.type == MOUSEBUTTONDOWN :

@@ -78,7 +78,7 @@ class deviningletters :
             self.img = pygame.image.load(str(path.parent) + "/lettres/lettrevide/" + "lettre_" + ".png").convert()
             self.img = pygame.transform.scale(self.img, (75, 75))
         elif newstatus == "" :
-            self.img = pygame.image.load(str(path.parent) + "/lettres/lettrevide/" + "lettrevide" + ".png").convert()
+            self.img = pygame.image.load(str(path.parent) + "/lettres/lettrevide/" + "lettr_" + ".png").convert()
             self.img = pygame.transform.scale(self.img, (75, 75))
         else :
             self.img = pygame.image.load(str(path.parent) + "/lettres/newletters/lettre" + str(newstatus) + ".png").convert()
