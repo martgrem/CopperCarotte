@@ -543,6 +543,11 @@ def leaderboard(fenetre) :
 
 menu()
 
+f = open(str(script_path.parent.parent.parent) + "/leaderboard.txt", "r")
+lines = f.readlines()
+f.close()
+for i in lines :
+    print(i.strip())
 
 
 
