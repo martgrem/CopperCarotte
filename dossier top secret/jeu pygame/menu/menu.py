@@ -124,7 +124,7 @@ def jeu(fenetre) :
     réponses = f.readlines()
     f.close()
     answer, oùilenest = game.init(réponses)
-    while len(answer) > 20 :
+    while len(answer) > 20 or "œ" in answer :
         answer, oùilenest = game.init(réponses)
     #answer, oùilenest = game.init(["testabab"])    # pour les tests
     #print(answer,oùilenest)
