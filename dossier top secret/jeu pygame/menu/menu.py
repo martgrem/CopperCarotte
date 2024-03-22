@@ -519,9 +519,9 @@ def compétition(fenetre) :
             if event.type == KEYDOWN :
                 if event.key == K_ESCAPE :
                     cont=False
-                    return   
-            
+                    return 
 
+     
 def leaderboard(fenetre) :
     cont = True
     global script_path
