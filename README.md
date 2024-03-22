@@ -4,4 +4,6 @@ Le projet porte sur le célèbre jeu du pendu. Il y a plusieurs manières de jou
 Marche à suivre : 
 Se rendre en salle d'informatique C06 et s'installer sur un des postes, car les fenêtres ont étées conçue pour ces écrans.
 Installer python, puis écrire dans le terminal pip3 install pygame.
+Il ne faut pas modifier le dosier leaderboard.txt à la main.
 Ensuite faites vous plaisir :)
+
