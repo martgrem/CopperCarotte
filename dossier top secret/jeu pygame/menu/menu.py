@@ -22,7 +22,7 @@ import Compétition
 
 hard = False
 bordel = aleajactaest.choice([True, False, False])
-nb_essais = 20
+nb_essais = 15
 
 
 
