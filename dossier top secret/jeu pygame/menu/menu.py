@@ -10,16 +10,16 @@ import sys
 
 from pathlib import Path
 script_path = Path(__file__).resolve()
-#print(script_path)
 import lettres
 import game
 import skinpendu
 import devinage
-import leaderboard
+#import leaderboard
 import score
+import boutonssettings
 
 
-hard = True
+hard = False
 bordel = aleajactaest.choice([True, False, False])
 nb_essais = 20
 
@@ -48,10 +48,22 @@ def menu() :
     setbtn = pygame.transform.scale(setbtn, (744, 232))
     pos_setbtn[0], pos_setbtn[1] = pos_fenetre.size[0]/2 - pos_setbtn[2]/2, pos_fenetre.size[1]/2 - pos_setbtn[3]/2 + 100
 
+    compbtn = pygame.image.load(str(script_path.parent)+"/boutons menu/Bouton Compétition.png").convert()
+    compbtn = pygame.transform.scale(compbtn, (135*5, 29*5))
+    pos_compbtn = compbtn.get_rect()
+    pos_compbtn[0], pos_compbtn[1] = pos_fenetre.size[0]/2 - pos_compbtn[2]/2, pos_fenetre.size[1]/2 - pos_compbtn[3]/2 + 350
+
+    hsbtn = pygame.image.load(str(script_path.parent)+"/boutons menu/Leaderboard.png").convert()
+    hsbtn = pygame.transform.scale(hsbtn, (135*5, 29*5))
+    pos_hsbtn = hsbtn.get_rect()
+    pos_hsbtn[0], pos_hsbtn[1] = pos_fenetre.size[0]/2 - pos_hsbtn[2]/2, pos_fenetre.size[1]/2 - pos_hsbtn[3]/2 + 550
 
     fenetre.blit(fond, (0, 0))
     fenetre.blit(playbtn, (pos_playbtn[0], pos_playbtn[1]))
     fenetre.blit(setbtn, (pos_setbtn[0], pos_setbtn[1]))
+    fenetre.blit(compbtn, (pos_compbtn[0], pos_compbtn[1]))
+    fenetre.blit(hsbtn, (pos_hsbtn[0], pos_hsbtn[1]))
+
     pygame.display.flip()
 
 
@@ -65,6 +77,9 @@ def menu() :
         fenetre.blit(fond, (0, 0))
         fenetre.blit(playbtn, (pos_playbtn[0], pos_playbtn[1]))
         fenetre.blit(setbtn, (pos_setbtn[0], pos_setbtn[1]))
+        fenetre.blit(compbtn, (pos_compbtn[0], pos_compbtn[1]))
+        fenetre.blit(hsbtn, (pos_hsbtn[0], pos_hsbtn[1]))
+        
         pygame.display.flip()
 
 
@@ -81,8 +96,12 @@ def menu() :
                     pos = pygame.mouse.get_pos()
                     if pos_playbtn[0] <= pos[0] <= pos_playbtn[0] + pos_playbtn[2] and pos_playbtn[1] <= pos[1] <= pos_playbtn[1] + pos_playbtn[3] :
                         jeu(fenetre)
-                    if pos_setbtn[0] <= pos[0] <= pos_setbtn[0] + pos_setbtn[2] and pos_setbtn[1] <= pos[1] <= pos_setbtn[1] + pos_setbtn[3] :
+                    elif pos_setbtn[0] <= pos[0] <= pos_setbtn[0] + pos_setbtn[2] and pos_setbtn[1] <= pos[1] <= pos_setbtn[1] + pos_setbtn[3] :
                         settings(fenetre)
+                    elif pos_compbtn[0] <= pos[0] <= pos_compbtn[0] + pos_compbtn[2] and pos_compbtn[1] <= pos[1] <= pos_compbtn[1] + pos_compbtn[3] :
+                        compétition(fenetre)
+                    elif pos_hsbtn[0] <= pos[0] <= pos_hsbtn[0] + pos_hsbtn[2] and pos_hsbtn[1] <= pos[1] <= pos_hsbtn[1] + pos_hsbtn[3] :
+                        leaderboard(fenetre)
 
 
 
@@ -104,6 +123,8 @@ def jeu(fenetre) :
     réponses = f.readlines()
     f.close()
     answer, oùilenest = game.init(réponses)
+    while len(answer) > 20 :
+        answer, oùilenest = game.init(réponses)
     #answer, oùilenest = game.init(["testabab"])    # pour les tests
     #print(answer,oùilenest)
     #fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
@@ -275,8 +296,7 @@ def jeu(fenetre) :
                     lettre[i].justguessed = False
                     justesse, pénalité, oùilenest, essayés = game.deviner(answer, oùilenest, essayés, i.lower())
                     if pénalité :
-                        print(indskin)
-                        if indskin < 19:
+                        if indskin < len(skin) - 2 :
                             indskin+= 1
                             nbessai += 1
                         else :
@@ -298,42 +318,7 @@ def jeu(fenetre) :
                         devining[i].write(oùilenest[i-1])
 
 
-def settings(fenetre) :
-    cont = True
-    global script_path
-    #fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-    pos_fenetre = fenetre.get_rect()
-    fond = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
-    fond = pygame.transform.scale(fond, pos_fenetre.size)
 
-    hard = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
-    hard = pygame.transform.scale(fond, (500, 232))
-
-    essai5 = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
-    essai5 = pygame.transform.scale(fond, (500, 232))
-
-    fenetre.blit(fond, (0, 0))
-    fenetre.blit(hard, (1000, 600))
-    fenetre.blit(essai5, (1700, 600))
-
-    pygame.display.flip()
-
-    while cont:    
-        
-        fenetre.blit(fond, (0, 0))
-        fenetre.blit(hard, (500, 400))
-        fenetre.blit(essai5, (1700, 600))
-        pygame.display.flip()
-        
-
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                cont=False
-                pygame.display.quit()
-            if event.type == KEYDOWN :
-                if event.key == K_ESCAPE :
-                    cont=False
-                    return   
 
 
 
@@ -356,12 +341,16 @@ def loose(fenetre, answer, oùilenest, nbessai) :
     pos_fenetre = fenetre.get_rect()
     fond = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
     fond = pygame.transform.scale(fond, pos_fenetre.size)
+    points = pygame.image.load(str(script_path.parent)+"/boutons menu/Bouton Points.png").convert()
+    pos_points = points.get_rect()
+    points = pygame.transform.scale(points, pos_points.size)
 
     pygame.display.flip()
 
     while cont:
 
         fenetre.blit(fond, (0, 0))
+        fenetre.blit(points, (pos_fenetre.size[0]/2 - pos_points.size[0]/2, 50))
         for i in range(3) :
             fenetre.blit(uscore[i+1].img, uscore[i+1].wanted_pos)
 
@@ -396,12 +385,16 @@ def win(fenetre, answer, oùilenest, nbessai) :
     pos_fenetre = fenetre.get_rect()
     fond = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
     fond = pygame.transform.scale(fond, pos_fenetre.size)
+    points = pygame.image.load(str(script_path.parent)+"/boutons menu/Bouton Points.png").convert()
+    pos_points = points.get_rect()
+    points = pygame.transform.scale(points, pos_points.size)
 
     pygame.display.flip()
 
     while cont:
 
         fenetre.blit(fond, (0, 0))
+        fenetre.blit(points, (pos_fenetre.size[0]//2 - pos_points.size[0]//2, 50))    
         for i in range(3) :
             fenetre.blit(uscore[i+1].img, uscore[i+1].wanted_pos)
 
@@ -418,6 +411,143 @@ def win(fenetre, answer, oùilenest, nbessai) :
 
 
 
+def settings(fenetre) :
+    cont = True
+    global script_path
+    global hard
+    global nb_essais
+    #fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+    pos_fenetre = fenetre.get_rect()
+    fond = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
+    fond = pygame.transform.scale(fond, pos_fenetre.size)
+
+    noteasy = pygame.image.load(str(script_path.parent)+"/boutons settings/Bouton Difficile.png").convert()
+    noteasy = pygame.transform.scale(noteasy, (135*5, 29*5))
+
+    easy = pygame.image.load(str(script_path.parent)+"/boutons settings/Bouton Facile.png").convert()
+    easy = pygame.transform.scale(easy, (135*5, 29*5))
+
+    pos_noteasy = noteasy.get_rect()
+    pos_noteasy[0], pos_noteasy[1] = pos_fenetre.size[0]/2 - pos_noteasy[2]/2, pos_fenetre.size[1]/2 - pos_noteasy[3]/2 - 200
+
+    pos_diff = pos_fenetre.size[0]/2 - pos_noteasy[2]/2, pos_fenetre.size[1]/2 - pos_noteasy[3]/2 - 200, pos_noteasy[2], pos_noteasy[3]
+
+    lbtn = pygame.image.load(str(script_path.parent)+"/boutons settings/Bouton Gauche.png").convert()
+    lbtn = pygame.transform.scale(lbtn, (31*5, 29*5))
+    pos_lbtn = pos_diff[0] - 50 - 31*5, pos_diff[1], 31*5, 29*5
+
+    rbtn = pygame.image.load(str(script_path.parent)+"/boutons settings/Bouton Droite.png").convert()
+    rbtn = pygame.transform.scale(rbtn, (31*5, 29*5))
+    pos_rbtn = pos_diff[0] + pos_diff[2] + 50, pos_diff[1], 31*5, 29*5
+
+    essaisbtn = pygame.image.load(str(script_path.parent)+"/boutons settings/Bouton Essais.png").convert()
+    essaisbtn = pygame.transform.scale(rbtn, (116*5, 26*5))
+    
+    nbessais = {}
+    for i in ["05", "10", "15", "20"] :
+        nbessais[i] = boutonssettings.essaisnb(i)
+
+    if hard :
+        difficulté = noteasy
+    else :
+        difficulté = easy
+
+
+
+    fenetre.blit(fond, (0, 0))
+    fenetre.blit(difficulté, (pos_diff))
+    fenetre.blit(lbtn, (pos_lbtn[0], pos_lbtn[1]))
+    fenetre.blit(rbtn, (pos_rbtn[0], pos_rbtn[1]))
+
+    pygame.display.flip()
+
+    while cont:    
+            
+        fenetre.blit(fond, (0, 0))
+        fenetre.blit(difficulté, (pos_diff))
+        fenetre.blit(lbtn, (pos_lbtn[0], pos_lbtn[1]))
+        fenetre.blit(rbtn, (pos_rbtn[0], pos_rbtn[1]))
+        for i in nbessais.keys() :
+             fenetre.blit(nbessais[i].img1, nbessais[i].wanted_pos[0])
+             fenetre.blit(nbessais[i].img2, nbessais[i].wanted_pos[1])
+
+        pygame.display.flip()
+        
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                cont=False
+                pygame.display.quit()
+            if event.type == KEYDOWN :
+                if event.key == K_ESCAPE :
+                    cont=False
+                    return   
+            
+            if event.type == MOUSEBUTTONDOWN :
+                if pygame.mouse.get_pressed()[0] :
+                    pos = pygame.mouse.get_pos()
+                    if pos_lbtn[0] <= pos[0] <= pos_lbtn[0] + pos_lbtn[2] and pos_lbtn[1] <= pos[1] <= pos_lbtn[1] + pos_lbtn[3] :
+                        hard = False
+                        difficulté = easy
+                    elif pos_rbtn[0] <= pos[0] <= pos_rbtn[0] + pos_rbtn[2] and pos_rbtn[1] <= pos[1] <= pos_rbtn[1] + pos_rbtn[3] :
+                        hard = True
+                        difficulté = noteasy
+
+
+def compétition(fenetre) :
+    cont = True
+    global script_path
+    #fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+    pos_fenetre = fenetre.get_rect()
+    fond = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
+    fond = pygame.transform.scale(fond, pos_fenetre.size)
+
+    fenetre.blit(fond, (0, 0))
+
+    pygame.display.flip()
+
+    while cont:    
+        
+        fenetre.blit(fond, (0, 0))
+        pygame.display.flip()
+        
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                cont=False
+                pygame.display.quit()
+            if event.type == KEYDOWN :
+                if event.key == K_ESCAPE :
+                    cont=False
+                    return   
+            
+
+def leaderboard(fenetre) :
+    cont = True
+    global script_path
+    #fenetre = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+    pos_fenetre = fenetre.get_rect()
+    fond = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
+    fond = pygame.transform.scale(fond, pos_fenetre.size)
+
+    fenetre.blit(fond, (0, 0))
+
+    pygame.display.flip()
+
+    while cont:    
+        
+        fenetre.blit(fond, (0, 0))
+        pygame.display.flip()
+        
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                cont=False
+                pygame.display.quit()
+            if event.type == KEYDOWN :
+                if event.key == K_ESCAPE :
+                    cont=False
+                    return  
 
 
 
