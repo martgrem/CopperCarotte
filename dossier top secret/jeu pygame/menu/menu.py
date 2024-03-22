@@ -441,7 +441,8 @@ def settings(fenetre) :
     pos_rbtn = pos_diff[0] + pos_diff[2] + 50, pos_diff[1], 31*5, 29*5
 
     essaisbtn = pygame.image.load(str(script_path.parent)+"/boutons settings/Bouton Essais.png").convert()
-    essaisbtn = pygame.transform.scale(rbtn, (116*5, 26*5))
+    essaisbtn = pygame.transform.scale(essaisbtn, (116*5, 26*5))
+    pos_essaisbtn = (700, 485)
     
     nbessais = {}
     for i in ["05", "10", "15", "20"] :
@@ -458,6 +459,7 @@ def settings(fenetre) :
     fenetre.blit(difficulté, (pos_diff))
     fenetre.blit(lbtn, (pos_lbtn[0], pos_lbtn[1]))
     fenetre.blit(rbtn, (pos_rbtn[0], pos_rbtn[1]))
+    fenetre.blit(essaisbtn, pos_essaisbtn)
 
     pygame.display.flip()
 
@@ -467,6 +469,7 @@ def settings(fenetre) :
         fenetre.blit(difficulté, (pos_diff))
         fenetre.blit(lbtn, (pos_lbtn[0], pos_lbtn[1]))
         fenetre.blit(rbtn, (pos_rbtn[0], pos_rbtn[1]))
+        fenetre.blit(essaisbtn, pos_essaisbtn)
         for i in nbessais.keys() :
              fenetre.blit(nbessais[i].img1, nbessais[i].wanted_pos[0])
              fenetre.blit(nbessais[i].img2, nbessais[i].wanted_pos[1])
