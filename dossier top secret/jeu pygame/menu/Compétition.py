@@ -103,12 +103,7 @@ def jeu(fenetre) :
         if countdown > 0 :
             countdown -= 1
         if countdown == 0 :
-            if indskin == 20 :
-                finalscorr = loose(fenetre, answer, finalguess, finaltries)
-                return finalscorr
-            elif not "_" in oùilenest :
-                finalscorr = win(fenetre, answer, finalguess, finaltries)
-                return finalscorr
+            return score.scorr(oùilenest, nbessai)
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -238,60 +233,12 @@ def jeu(fenetre) :
 
 
 
-
-
-
-def loose(fenetre, answer, oùilenest, nbessai) :
-    #print("loss")
-    cont = True
-    global script_path
-
-    scorr = score.scorr(oùilenest, nbessai)
-    finalscorr = scorr
-    scorr =str(scorr)[::-1]
-    #print(scorr)
-    uscore ={}
-    for j in range(3) :
-        try :
-            uscore[j+1] = score.score(j+1, scorr[j])
-        except :
-            uscore[j+1] = score.score(j+1, "")
-
-    pos_fenetre = fenetre.get_rect()
-    fond = pygame.image.load(str(script_path.parent)+"/fond d'écran menu.jpg").convert()
-    fond = pygame.transform.scale(fond, pos_fenetre.size)
-    points = pygame.image.load(str(script_path.parent)+"/boutons menu/Bouton Points.png").convert()
-    pos_points = points.get_rect()
-    points = pygame.transform.scale(points, pos_points.size)
-
-    pygame.display.flip()
-
-    while cont:
-
-        fenetre.blit(fond, (0, 0))
-        fenetre.blit(points, (pos_fenetre.size[0]/2 - pos_points.size[0]/2, 50))
-        for i in range(3) :
-            fenetre.blit(uscore[i+1].img, uscore[i+1].wanted_pos)
-
-        pygame.display.flip()
-
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                cont=False
-                pygame.display.quit()
-            if event.type == KEYDOWN :
-                if event.key == K_SPACE :
-                    cont=False
-                    return finalscorr
-    
-
-def win(fenetre, answer, oùilenest, nbessai) :
+def win(fenetre, scorr) :
     #print("win")
     cont = True
     global script_path
 
-    scorr = score.scorr(oùilenest, nbessai)
-    finalscorr = scorr
+    #print(scorr)
     scorr =str(scorr)[::-1]
     #print(scorr)
     uscore ={}
@@ -324,9 +271,10 @@ def win(fenetre, answer, oùilenest, nbessai) :
                 cont=False
                 pygame.display.quit()
             if event.type == KEYDOWN :
-                if event.key == K_SPACE :
+                if event.key == K_ESCAPE :
                     cont=False
-                    return finalscorr
+                    return   
+
 
 
 
@@ -337,11 +285,12 @@ def win(fenetre, answer, oùilenest, nbessai) :
 
 def compétition(fenetre) :
     scorr = 0
-    for _ in range(3) :
+    for _ in range(1) :
          c = jeu(fenetre)
          if c == "closed" :
              return
          scorr += c
+    win(fenetre, scorr)
     print(scorr)
     # cont = True
     # global script_path
