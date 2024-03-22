@@ -4,7 +4,11 @@ Le projet porte sur le célèbre jeu du pendu. Il y a plusieurs manières de jou
 Marche à suivre : 
 Se rendre en salle d'informatique C06 et s'installer sur un des postes, car les fenêtres ont étées conçue pour ces écrans.
 Installer python, puis écrire dans le terminal pip3 install pygame.
+
 Pour jouer il faut lancer le fichier "menu.py"qui se trouve dans le dossier "menu" qui est dans le dossier "jeu pygame" qui se trouve lui même dans le dossier "dossier top secret" qui est dans le dossier "coppercarrot"
+
+Malheureusement le bouton leaderboard de l'interface graphique ne mène à rien.
 Pour consulter le leaderboard, il faut se rendre dans le fichier leadeboard.txt qui se trouve dans le dosier "dossier top secret", mais il ne faut pas le modifier à la main.
+
 Ensuite faites vous plaisir :)
 
